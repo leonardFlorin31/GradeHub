@@ -1,6 +1,4 @@
-﻿
-
-public class GradeHub
+﻿public class GradeHub
 {
     public static void Main(string[] args)
     {
