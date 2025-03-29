@@ -1,4 +1,4 @@
-﻿namespace global::GradeHub.MainClasses;
+﻿namespace GradeHub.MainClasses;
 
 public class Grade
 {

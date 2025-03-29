@@ -1,19 +1,28 @@
-﻿using IPerson = global.GradeHub.MainClasses.IPerson;
-using Person = global.GradeHub.MainClasses.Person;
-
-namespace global::GradeHub.MainClasses;
+﻿
+namespace GradeHub.MainClasses;
 
 public class Person : IPerson
 {
     private string _firstName;
     private string _lastName;
     private int _age;
+    private UserCredentials _userCredentials;
 
     public Person(string firstName, string lastName, int age)
     {
         _firstName = firstName;
         _lastName = lastName;
         _age = age;
+    }
+    
+    public void SetUserCredentials(UserCredentials userCredentials)
+    {
+        _userCredentials = userCredentials;
+    }
+    
+    public UserCredentials GetUserCredentials()
+    {
+        return _userCredentials;
     }
 
     public void SetName(string firstName, string lastName)

@@ -1,18 +1,15 @@
-﻿using Grade = global.GradeHub.MainClasses.Grade;
-using Person = global.GradeHub.MainClasses.Person;
+﻿
 
-namespace global::GradeHub.MainClasses;
+namespace GradeHub.MainClasses;
 
 public class Student : Person
 {
     private Dictionary<DateTime, Grade> _grades;
     private string _studentId;
-    private string _classId;
     
-    public Student(string firstName, string lastName, int age, string studentId, string classId) : base(firstName, lastName, age)
+    public Student(string firstName, string lastName, int age, string studentId) : base(firstName, lastName, age)
     {
         _studentId = studentId;
-        _classId = classId;
         _grades = new Dictionary<DateTime, Grade>();
     }
     
@@ -25,6 +22,11 @@ public class Student : Person
     {
         _grades.Add(DateTime.Now, grade);
     }
+    
+    public Dictionary<DateTime, Grade> GetGrades()
+    {
+        return _grades;
+    }
 
     public void SetStudentId(string studentId)
     {
@@ -36,13 +38,4 @@ public class Student : Person
         return _studentId;
     }
 
-    public void SetClassId(string classId)
-    {
-        _classId = classId;
-    }
-
-    public string GetClassId()
-    {
-        return _classId;
-    }
 }

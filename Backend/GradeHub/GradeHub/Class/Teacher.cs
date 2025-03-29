@@ -1,6 +1,5 @@
-﻿using Person = global.GradeHub.MainClasses.Person;
-
-namespace global::GradeHub.MainClasses;
+﻿
+namespace GradeHub.MainClasses;
 
 public class Teacher : Person
 {
