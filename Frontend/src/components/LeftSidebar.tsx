@@ -1,14 +1,14 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../constants";
 import { INavLink } from "../types";
-import { useAuth } from "../AuthContext";
+import { useAuthContext } from "../AuthContext";
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { currentUser } = useAuth();
+  const { user, logout } = useAuthContext();
 
-  if (!currentUser) {
+  if (!user) {
     return <div>Loading...</div>; // Or redirect to login, or show a fallback UI
   }
 
@@ -16,14 +16,11 @@ const LeftSidebar = () => {
     <nav className="hidden md:flex px-6 py-10 flex-col justify-between w-[300px] bg-lm-secondary dark:bg-dm-dark">
       <div className="flex flex-col gap-8">
         <Link
-          to={`/profile/${currentUser.userId}`}
+          to={`/profile/${user.userId}`}
           className="flex gap-3 items-center"
         >
           <div className="flex flex-col">
-            <p className="body-bold">{currentUser.name}</p>
-            <p className="small-regular text-dm-light-3">
-              @{currentUser.username}
-            </p>
+            <p className="body-bold">{user.name}</p>
           </div>
         </Link>
 
@@ -54,7 +51,7 @@ const LeftSidebar = () => {
       <button
         className="flex gap-4 items-center justify-start hover:bg-transparent hover:text-white  mt-9"
         onClick={() => {
-          console.log("not implemented");
+          logout();
         }}
       >
         Logout
