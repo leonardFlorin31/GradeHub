@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IContextType, ICurrentUser } from "./types";
+import { set } from "zod";
 
 export const INITIAL_USER = {
   userId: "",
@@ -9,16 +10,18 @@ export const INITIAL_USER = {
   role: "" as "teacher" | "student",
 };
 
-const INITIAL_STATE = {
+const INITIAL_STATE: IContextType = {
   user: INITIAL_USER,
   isLoading: false,
   isAuthenticated: false,
+  error: null, // Add error state
   setUser: () => {},
   setIsAuthenticated: () => {},
   checkAuthUser: async () => false as boolean,
-  login: async () => false as boolean,
+  login: async () => ({ success: false, message: "" }), // Updated return type
   logout: () => {},
-  register: async () => false as boolean,
+  register: async () => ({ success: false, message: "" }), // Updated return type
+  clearError: () => {}, // Add clearError function
 };
 
 const AuthContext = createContext<IContextType>(INITIAL_STATE);
@@ -65,6 +68,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<ICurrentUser>(INITIAL_USER);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const clearError = () => setError(null);
 
   const navigate = useNavigate();
 
@@ -93,37 +99,38 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Login function
   const login = async (email: string, password: string) => {
     setIsLoading(true);
+    setError(null);
     try {
       const data = getLocalStorageUsers();
-      const user = data.users.find(
-        (u: any) => u.email === email && u.password === password
-      );
+      const user = data.users.find((u: any) => u.email === email);
 
-      if (user) {
-        const currentUser = {
-          userId: user.userId,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        };
-
-        setUser(currentUser);
-        setIsAuthenticated(true);
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-        // Redirect based on role
-        if (user.role === "teacher") {
-          navigate("/");
-        } else {
-          navigate("/");
-        }
-
-        return true;
+      if (!user) {
+        setError("No account found with this email");
+        return { success: false, message: "No account found with this email" };
       }
-      return false;
+
+      if (user.password !== password) {
+        setError("Incorrect password");
+        return { success: false, message: "Incorrect password" };
+      }
+
+      const currentUser = {
+        userId: user.userId,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      };
+
+      setUser(currentUser);
+      setIsAuthenticated(true);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      navigate(user.role === "teacher" ? "/" : "/");
+      return { success: true };
     } catch (error) {
-      console.error("Login error:", error);
-      return false;
+      const message = "An unexpected error occurred. Please try again.";
+      setError(message);
+      return { success: false, message };
     } finally {
       setIsLoading(false);
     }
@@ -145,12 +152,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     role: "teacher" | "student";
   }) => {
     setIsLoading(true);
+    setError(null);
     try {
       const data = getLocalStorageUsers();
 
-      // Check if user already exists
       if (data.users.some((u: any) => u.email === userData.email)) {
-        throw new Error("User with this email already exists");
+        const message = "Email already in use";
+        setError(message);
+        return { success: false, message };
       }
 
       const newUser = {
@@ -164,7 +173,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       data.users.push(newUser);
       saveLocalStorageUsers(data);
 
-      // Auto-login after registration
       const currentUser = {
         userId: newUser.userId,
         name: newUser.name,
@@ -176,17 +184,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsAuthenticated(true);
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-      // Redirect based on role
-      if (newUser.role === "teacher") {
-        navigate("/");
-      } else {
-        navigate("/");
-      }
-
-      return true;
+      navigate(newUser.role === "teacher" ? "/" : "/");
+      return { success: true };
     } catch (error) {
-      console.error("Registration error:", error);
-      throw error;
+      const message = "Registration failed. Please try again.";
+      setError(message);
+      return { success: false, message };
     } finally {
       setIsLoading(false);
     }
@@ -207,6 +210,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login,
     logout,
     register,
+    error,
+    clearError,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

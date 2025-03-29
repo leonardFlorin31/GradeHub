@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,53 +16,46 @@ import { useAuthContext } from "@/AuthContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@radix-ui/react-checkbox";
 
-// Define validation schema with Zod
 const SignInValidation = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  remember: z.boolean().optional(),
 });
 
 const SigninForm = () => {
-  const navigate = useNavigate();
-  const { login, isLoading } = useAuthContext();
+  const { login, isLoading, error, clearError } = useAuthContext();
   const [showPassword, setShowPassword] = useState(false);
-  const [serverError, setServerError] = useState("");
 
-  // Form handling with react-hook-form and Zod
   const form = useForm<z.infer<typeof SignInValidation>>({
     resolver: zodResolver(SignInValidation),
     defaultValues: {
       email: "",
       password: "",
-      remember: false,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof SignInValidation>) => {
-    setServerError("");
-    try {
-      const success = await login(values.email, values.password);
-      if (!success) {
-        setServerError("Invalid email or password");
-      }
-    } catch (error) {
-      setServerError("An unexpected error occurred. Please try again.");
-      console.error("SignIn Error:", error);
+    clearError(); // Clear any previous errors
+    const { success } = await login(values.email, values.password);
+
+    if (!success) {
+      // Error message is already set in the AuthContext
+      // No need to set it here as it will be displayed from the context's error state
+      return;
     }
   };
 
-  // Demo login handler
   const handleDemoLogin = (role: "teacher" | "student") => {
+    clearError();
     const demoCredentials = {
       teacher: { email: "teacher@example.com", password: "12345678" },
       student: { email: "student@example.com", password: "12345678" },
     };
     form.setValue("email", demoCredentials[role].email);
     form.setValue("password", demoCredentials[role].password);
-    form.setValue("remember", true);
+
+    // Auto-submit the form after setting demo credentials
+    form.handleSubmit(onSubmit)();
   };
 
   return (
@@ -74,15 +66,15 @@ const SigninForm = () => {
           <p className="mt-2 text-md">Sign in to your account to continue</p>
         </div>
 
-        {/* Server error message */}
-        {serverError && (
+        {/* Error message from AuthContext */}
+        {error && (
           <Alert
             variant="destructive"
             className="border-choco-cosmos bg-choco-cosmos/10"
           >
             <AlertCircle className="h-4 w-4 text-choco-cosmos" />
             <AlertDescription className="text-choco-cosmos">
-              {serverError}
+              {error}
             </AlertDescription>
           </Alert>
         )}
@@ -94,7 +86,6 @@ const SigninForm = () => {
             noValidate
           >
             <div className="space-y-4 text-rich-black">
-              {/* Email Field */}
               <FormField
                 control={form.control}
                 name="email"
@@ -116,7 +107,6 @@ const SigninForm = () => {
                 )}
               />
 
-              {/* Password Field */}
               <FormField
                 control={form.control}
                 name="password"
@@ -150,7 +140,6 @@ const SigninForm = () => {
               />
             </div>
 
-            {/* Submit Button - Updated */}
             <div className="flex justify-center">
               <Button
                 type="submit"
@@ -170,7 +159,6 @@ const SigninForm = () => {
           </form>
         </Form>
 
-        {/* Demo Login Buttons */}
         <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -205,16 +193,8 @@ const SigninForm = () => {
           </div>
         </div>
 
-        {/* Forgot password and Sign up links */}
         <div className="flex items-center justify-center pt-4">
-          <Button
-            asChild
-            variant="link"
-            size="sm"
-            className="px-0 text-bice-blue hover:text-bice-blue/80"
-          ></Button>
-
-          <div className="text-sm text-rich-black/70">
+          <div className="text-sm text-rich-black/70 ml-4">
             Don't have an account?{" "}
             <Button
               asChild
@@ -222,7 +202,9 @@ const SigninForm = () => {
               size="sm"
               className="px-0 text-bice-blue hover:text-bice-blue/80"
             >
-              <Link to="/sign-up">Sign up</Link>
+              <Link to="/sign-up" onClick={clearError}>
+                Sign up
+              </Link>
             </Button>
           </div>
         </div>

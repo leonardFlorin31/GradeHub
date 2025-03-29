@@ -9,17 +9,22 @@ export interface IContextType {
   user: ICurrentUser;
   isLoading: boolean;
   isAuthenticated: boolean;
+  error: string | null;
   setUser: React.Dispatch<React.SetStateAction<ICurrentUser>>;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   checkAuthUser: () => Promise<boolean>;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
   register: (userData: {
     name: string;
     email: string;
     password: string;
     role: "teacher" | "student";
-  }) => Promise<boolean>;
+  }) => Promise<{ success: boolean; message?: string }>;
+  clearError: () => void;
 }
 
 export type INavLink = {
