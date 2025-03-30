@@ -54,17 +54,25 @@ namespace GradeHub.Class
                 var studentId = gradeData.studentId;
                 var gradeValue = gradeData.gradeValue;
 
-                var student = Students.FirstOrDefault(s => s.GetStudentId() == studentId);
-
-                if (student != null)
+                // Grade Validation Logic
+                if (gradeValue > 0 && gradeValue <= 10)
                 {
-                    var grade = new Grade(classId, gradeValue);
-                    student.AddGradeToday(grade);
-                    Console.WriteLine($"  Uploaded grade {gradeValue} for student ID {studentId} ({student.GetName().firstName} {student.GetName().lastName}).");
+                    var student = Students.FirstOrDefault(s => s.GetStudentId() == studentId);
+
+                    if (student != null)
+                    {
+                        var grade = new Grade(classId, gradeValue);
+                        student.AddGradeToday(grade);
+                        Console.WriteLine($"  Uploaded grade {gradeValue} for student ID {studentId} ({student.GetName().firstName} {student.GetName().lastName}).");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"  Error: Student with ID {studentId} not found in class {ClassName}.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"  Error: Student with ID {studentId} not found in class {ClassName}.");
+                    Console.WriteLine($"  Warning: Invalid grade value '{gradeValue}' for student ID {studentId}. Grade not uploaded.");
                 }
             }
             Console.WriteLine("Bulk grade upload complete.");

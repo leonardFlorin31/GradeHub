@@ -8,7 +8,7 @@ public class MainClass
     {
         var people = new List<Person>();
 
-        var teacher = new Teacher("Leutu", "Thau", 30, "Math101");
+        var teacher = new Teacher("Leutu", "ProfuThau", 30, "Math101");
         var student1 = new Student("George", "Bossu", 20, "12340");
         var student2 = new Student("Raul", "The Horse", 21, "56789");
         var student3 = new Student("habar", "n am", 19, "98765");
@@ -41,9 +41,9 @@ public class MainClass
         // Simulate bulk grade upload
         var gradesToUpload = new List<(string studentId, int gradeValue)>
         {
-            ("12340", 85), // Jane Doe
-            ("56789", 92), // Peter Pan
-            ("98765", 78)  // Alice Smith
+            ("12340", 7), 
+            ("56789", 9), 
+            ("98765", -1) 
         };
 
         mathClass.BulkUploadGrades("Math101", gradesToUpload);
