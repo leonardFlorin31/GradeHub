@@ -8,7 +8,7 @@ public class MainClass
     {
         var people = new List<Person>();
 
-        var teacher = new Teacher("Leutu", "Thau", 30, "Math101");
+        var teacher = new Teacher("Leutu", "ProfuThau", 30, "Math101");
         var student1 = new Student("George", "Bossu", 20, "12340");
         var student2 = new Student("Raul", "The Horse", 21, "56789");
         var student3 = new Student("habar", "n am", 19, "98765");
@@ -38,12 +38,18 @@ public class MainClass
         mathClass.AddStudent(student2);
         mathClass.AddStudent(student3);
 
+        // Add some initial grades
+        student1.AddGrade(DateTime.Now.AddDays(-7), new Grade("Math101", 8));
+        student1.AddGradeToday(new Grade("Math101", 5));
+
+
         // Simulate bulk grade upload
         var gradesToUpload = new List<(string studentId, int gradeValue)>
         {
-            ("12340", 85), // Jane Doe
-            ("56789", 92), // Peter Pan
-            ("98765", 78)  // Alice Smith
+            ("12340", 7), 
+            ("56789", 9), 
+            ("98765", -1),
+            ("invalidId", 7)
         };
 
         mathClass.BulkUploadGrades("Math101", gradesToUpload);
@@ -55,6 +61,16 @@ public class MainClass
             foreach (var gradeEntry in student.GetGrades())
             {
                 Console.WriteLine($"  Date: {gradeEntry.Key.ToShortDateString()}, Grade: {gradeEntry.Value.GradeValue}");
+            }
+        }
+
+        Console.WriteLine($"\nGrade History for students in {mathClass.ClassName}:");
+        foreach (var student in mathClass.Students)
+        {
+            Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} (ID: {student.GetStudentId()}):");
+            foreach (var gradeEntry in student.GetGradeHistory())
+            {
+                Console.WriteLine($"  Date: {gradeEntry.Timestamp.ToShortDateString()}, Grade: {gradeEntry.Grade.GradeValue}");
             }
         }
     }
