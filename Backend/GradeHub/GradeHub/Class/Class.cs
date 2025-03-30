@@ -45,5 +45,29 @@ namespace GradeHub.Class
                 Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} is not in {ClassName}.");
             }
         }
+
+        public void BulkUploadGrades(string classId, List<(string studentId, int gradeValue)> grades)
+        {
+            Console.WriteLine($"\nStarting bulk grade upload for class: {ClassName} ({classId})");
+            foreach (var gradeData in grades)
+            {
+                var studentId = gradeData.studentId;
+                var gradeValue = gradeData.gradeValue;
+
+                var student = Students.FirstOrDefault(s => s.GetStudentId() == studentId);
+
+                if (student != null)
+                {
+                    var grade = new Grade(classId, gradeValue);
+                    student.AddGradeToday(grade);
+                    Console.WriteLine($"  Uploaded grade {gradeValue} for student ID {studentId} ({student.GetName().firstName} {student.GetName().lastName}).");
+                }
+                else
+                {
+                    Console.WriteLine($"  Error: Student with ID {studentId} not found in class {ClassName}.");
+                }
+            }
+            Console.WriteLine("Bulk grade upload complete.");
+        }
     }
 }
