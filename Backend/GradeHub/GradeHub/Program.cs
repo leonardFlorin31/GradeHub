@@ -28,6 +28,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Add a root URL redirect to Swagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 // Initialize sample data
 var people = new List<Person>();
 
