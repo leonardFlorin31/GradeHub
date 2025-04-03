@@ -1,0 +1,24 @@
+{
+  "Id": "12340",
+  "FirstName": "George",
+  "LastName": "Bossu",
+  "Age": 20,
+  "Credentials": {
+    "Username": "student1",
+    "Password": "password1",
+    "Email": "student1@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "ClassId": "Math101",
+      "Value": 8,
+      "Timestamp": "2025-03-27T10:08:53.45273+02:00"
+    },
+    {
+      "ClassId": "Math101",
+      "Value": 5,
+      "Timestamp": "2025-04-03T10:08:53.4635733+03:00"
+    }
+  ]
+}

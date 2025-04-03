@@ -1,0 +1,12 @@
+{
+  "FirstName": "Leutu",
+  "LastName": "ProfuThau",
+  "Age": 30,
+  "ClassId": "Math101",
+  "Credentials": {
+    "Username": "teacher",
+    "Password": "password",
+    "Email": "teacher@email.com",
+    "UserType": "Teacher"
+  }
+}
