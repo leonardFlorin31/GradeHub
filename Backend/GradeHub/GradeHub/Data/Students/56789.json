@@ -1,0 +1,13 @@
+{
+  "Id": "56789",
+  "FirstName": "Raul",
+  "LastName": "The Horse",
+  "Age": 21,
+  "Credentials": {
+    "Username": "student2",
+    "Password": "password2",
+    "Email": "student2@email.com",
+    "UserType": "Student"
+  },
+  "Grades": []
+}
