@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 
 import "./globals.css";
 import GradesPage from "./pages/GradesPage";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-grades" element={<GradesPage />} />
           <Route path="/class-grades" element={<GradesPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
       </Routes>
     </main>
