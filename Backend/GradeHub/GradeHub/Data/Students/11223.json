@@ -1,0 +1,22 @@
+{
+  "Id": "11223",
+  "Name": "Elena Smart",
+  "Credentials": {
+    "Username": "null",
+    "Password": "password4",
+    "Email": "elena@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "ClassId": "Bio202",
+      "Value": 6,
+      "Timestamp": "2025-04-05T16:08:11.6242802+03:00"
+    },
+    {
+      "ClassId": "Bio202",
+      "Value": 7,
+      "Timestamp": "2025-04-06T16:08:11.6242804+03:00"
+    }
+  ]
+}

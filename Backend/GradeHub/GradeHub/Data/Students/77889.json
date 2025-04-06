@@ -1,0 +1,22 @@
+{
+  "Id": "77889",
+  "Name": "Maria Green",
+  "Credentials": {
+    "Username": "null",
+    "Password": "password6",
+    "Email": "maria@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "ClassId": "CS303",
+      "Value": 8,
+      "Timestamp": "2025-04-06T16:08:11.624281+03:00"
+    },
+    {
+      "ClassId": "CS303",
+      "Value": 7,
+      "Timestamp": "2025-04-03T16:08:11.6242811+03:00"
+    }
+  ]
+}

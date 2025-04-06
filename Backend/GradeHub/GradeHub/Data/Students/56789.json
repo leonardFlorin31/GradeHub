@@ -1,13 +1,37 @@
 {
   "Id": "56789",
-  "FirstName": "Raul",
-  "LastName": "The Horse",
-  "Age": 21,
+  "Name": "Raul The Horse",
   "Credentials": {
-    "Username": "student2",
+    "Username": "null",
     "Password": "password2",
-    "Email": "student2@email.com",
+    "Email": "raul@email.com",
     "UserType": "Student"
   },
-  "Grades": []
+  "Grades": [
+    {
+      "ClassId": "Math101",
+      "Value": 7,
+      "Timestamp": "2025-04-04T16:08:11.6241968+03:00"
+    },
+    {
+      "ClassId": "Math101",
+      "Value": 9,
+      "Timestamp": "2025-04-06T16:08:11.6242779+03:00"
+    },
+    {
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-06T16:08:11.6242789+03:00"
+    },
+    {
+      "ClassId": "Bio202",
+      "Value": 8,
+      "Timestamp": "2025-04-05T16:08:11.624279+03:00"
+    },
+    {
+      "ClassId": "Bio202",
+      "Value": 9,
+      "Timestamp": "2025-04-06T16:08:11.6242793+03:00"
+    }
+  ]
 }

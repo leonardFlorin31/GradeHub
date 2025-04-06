@@ -24,11 +24,20 @@ const SignUpValidation = z
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
     role: z.enum(["teacher", "student"]),
+    classId: z.string().optional(),
+    className: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  });
+  })
+  .refine(
+    (data) => data.role === "student" || (data.classId && data.className),
+    {
+      message: "Class ID and Class Name are required for teachers",
+      path: ["classId"],
+    }
+  );
 
 const SignupForm = () => {
   const { register, isLoading, error, clearError } = useAuthContext();
@@ -43,23 +52,25 @@ const SignupForm = () => {
       password: "",
       confirmPassword: "",
       role: "student",
+      classId: "",
+      className: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof SignUpValidation>) => {
     clearError();
+
     const userData = {
       name: values.name,
       email: values.email,
       password: values.password,
       role: values.role,
+      classId: values.classId,
+      className: values.className,
     };
 
     const { success } = await register(userData);
-    if (!success) {
-      // Error message is already set in the AuthContext
-      return;
-    }
+    if (!success) return;
   };
 
   return (
@@ -246,6 +257,56 @@ const SignupForm = () => {
                 )}
               />
             </div>
+
+            {form.watch("role") === "teacher" && (
+              <>
+                {/* Class ID */}
+                <FormField
+                  control={form.control}
+                  name="classId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black">
+                        Class ID (e.g. MATH101)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Unique backend ID"
+                          disabled={isLoading}
+                          className="focus:ring-bice-blue focus:border-bice-blue border-rich-black/20 text-black"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-600" />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Class Name */}
+                <FormField
+                  control={form.control}
+                  name="className"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black">
+                        Class Name (e.g. Mathematics 101)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Display name"
+                          disabled={isLoading}
+                          className="focus:ring-bice-blue focus:border-bice-blue border-rich-black/20 text-black"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-600" />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
 
             {/* Submit Button */}
             <div className="flex justify-center">

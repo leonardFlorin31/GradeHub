@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 
 import "./globals.css";
+import GradesPage from "./pages/GradesPage";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route index element={<Home />} />
           {/* <Route path="/profile/:id/*" element={<Profile />} /> */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/my-grades" element={<GradesPage />} />
+          <Route path="/class-grades" element={<GradesPage />} />
         </Route>
       </Routes>
     </main>
