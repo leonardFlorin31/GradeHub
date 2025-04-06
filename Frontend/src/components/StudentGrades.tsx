@@ -10,6 +10,7 @@ const mockLabels = ["Assignment", "Quiz", "Midterm", "Project", "Homework"];
 
 const StudentGrades = ({ studentId }: { studentId: string }) => {
   const [grades, setGrades] = useState<Grade[]>([]);
+  const [showAverages, setShowAverages] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     fetch(`https://localhost:64060/api/students/${studentId}/grades`)
@@ -24,6 +25,19 @@ const StudentGrades = ({ studentId }: { studentId: string }) => {
     acc[grade.classId].push(grade);
     return acc;
   }, {});
+
+  const toggleAverage = (classId: string) => {
+    setShowAverages((prev) => ({
+      ...prev,
+      [classId]: !prev[classId],
+    }));
+  };
+
+  const calculateAverage = (grades: Grade[]) => {
+    if (grades.length === 0) return 0;
+    const sum = grades.reduce((acc, g) => acc + g.value, 0);
+    return (sum / grades.length).toFixed(2);
+  };
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -41,7 +55,8 @@ const StudentGrades = ({ studentId }: { studentId: string }) => {
               <h3 className="text-lg font-semibold mb-3 text-bice-blue">
                 {classId}
               </h3>
-              <ul className="space-y-2">
+
+              <ul className="space-y-2 mb-4">
                 {grades.map((grade, index) => {
                   const assignmentType =
                     mockLabels[index % mockLabels.length] + " " + (index + 1);
@@ -66,6 +81,22 @@ const StudentGrades = ({ studentId }: { studentId: string }) => {
                   );
                 })}
               </ul>
+
+              <button
+                onClick={() => toggleAverage(classId)}
+                className="text-sm text-white bg-bice-blue px-3 py-1 rounded hover:bg-blue-800 transition"
+              >
+                {showAverages[classId] ? "Hide Average" : "Show Average"}
+              </button>
+
+              {showAverages[classId] && (
+                <p className="mt-3 text-gray-700 font-medium">
+                  Average:{" "}
+                  <span className="text-bice-blue font-bold">
+                    {calculateAverage(grades)}
+                  </span>
+                </p>
+              )}
             </div>
           ))}
         </div>
