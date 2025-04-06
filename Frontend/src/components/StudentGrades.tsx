@@ -6,6 +6,8 @@ interface Grade {
   date: string;
 }
 
+const mockLabels = ["Assignment", "Quiz", "Midterm", "Project", "Homework"];
+
 const StudentGrades = ({ studentId }: { studentId: string }) => {
   const [grades, setGrades] = useState<Grade[]>([]);
 
@@ -40,19 +42,29 @@ const StudentGrades = ({ studentId }: { studentId: string }) => {
                 {classId}
               </h3>
               <ul className="space-y-2">
-                {grades.map((grade, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between items-center border-b pb-1"
-                  >
-                    <span className="text-gray-700 font-medium mr-5">
-                      {grade.value}
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      {new Date(grade.date).toLocaleDateString("en-GB")}
-                    </span>
-                  </li>
-                ))}
+                {grades.map((grade, index) => {
+                  const assignmentType =
+                    mockLabels[index % mockLabels.length] + " " + (index + 1);
+
+                  return (
+                    <li
+                      key={index}
+                      className="flex justify-between items-center border-b pb-2"
+                    >
+                      <div className="flex flex-col">
+                        <span className="text-sm text-gray-700 font-medium mb-2">
+                          {assignmentType}
+                        </span>
+                        <span className="text-bice-blue font-bold">
+                          {grade.value}
+                        </span>
+                      </div>
+                      <span className="text-sm text-gray-500">
+                        {new Date(grade.date).toLocaleDateString("en-GB")}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
