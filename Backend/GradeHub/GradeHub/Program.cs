@@ -144,6 +144,31 @@ var mathClass = classes.FirstOrDefault();
 
 // API Endpoints
 
+app.MapPost("/api/auth/reset-password", ([FromBody] ResetPasswordDto dto) =>
+{
+    var person = people.FirstOrDefault(p =>
+        p.GetUserCredentials()?.Email == dto.Email);
+
+    if (person == null)
+        return Results.NotFound("User with this email not found");
+
+    var credentials = person.GetUserCredentials();
+    if (credentials == null)
+        return Results.BadRequest("User does not have credentials");
+
+    // Update password
+    credentials.Password = dto.NewPassword;
+
+    // Save user
+    if (person is Student student)
+        SaveStudentData(student);
+    else if (person is Teacher teacher)
+        SaveTeacherData(teacher);
+
+    return Results.Ok("Password reset successfully");
+});
+
+
 // Students endpoints
 app.MapGet("/api/students", () => {
     var students = people.OfType<Student>().Select(s => new {
@@ -749,4 +774,10 @@ public class StoredClassDto
     public string ClassName { get; set; }
     public string TeacherId { get; set; }
     public List<string> StudentIds { get; set; } = new List<string>();
+}
+
+public class ResetPasswordDto
+{
+    public string Email { get; set; }
+    public string NewPassword { get; set; }
 }
