@@ -45,7 +45,6 @@ const LeftSidebar = () => {
               </li>
             );
           })}
-
           {/* 👇 Role-based grade tab */}
           {user.role === "student" && (
             <li>
@@ -57,7 +56,6 @@ const LeftSidebar = () => {
               </NavLink>
             </li>
           )}
-
           {user.role === "teacher" && (
             <li>
               <NavLink
@@ -68,6 +66,15 @@ const LeftSidebar = () => {
               </NavLink>
             </li>
           )}
+
+          <li>
+            <NavLink
+              to="/reset-password"
+              className="flex gap-4 items-center p-4 rounded-lg base-medium hover:dark:bg-dm-secondary hover:bg-lm-primary hover:text-lm-light transition"
+            >
+              🔒 Reset Password
+            </NavLink>
+          </li>
         </ul>
       </div>
 
