@@ -101,36 +101,36 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = getLocalStorageUsers();
-      const user = data.users.find((u: any) => u.email === email);
+      const res = await fetch("https://localhost:64060/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-      if (!user) {
-        setError("No account found with this email");
-        return { success: false, message: "No account found with this email" };
+      if (!res.ok) {
+        const msg =
+          res.status === 401 ? "Invalid email or password" : "Login failed";
+        setError(msg);
+        return { success: false, message: msg };
       }
 
-      if (user.password !== password) {
-        setError("Incorrect password");
-        return { success: false, message: "Incorrect password" };
-      }
-
+      const data = await res.json();
       const currentUser = {
-        userId: user.userId,
-        name: user.name,
-        email: user.email,
-        role: user.role,
+        userId: data.id,
+        name: data.name,
+        email: data.email,
+        role: data.role.toLowerCase(), // Convert "Teacher"/"Student" to enum
       };
 
       setUser(currentUser);
       setIsAuthenticated(true);
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-      navigate(user.role === "teacher" ? "/" : "/");
+      navigate(currentUser.role === "teacher" ? "/" : "/");
       return { success: true };
-    } catch (error) {
-      const message = "An unexpected error occurred. Please try again.";
-      setError(message);
-      return { success: false, message };
+    } catch (err) {
+      setError("Login failed. Please try again.");
+      return { success: false, message: "Login failed" };
     } finally {
       setIsLoading(false);
     }
@@ -145,51 +145,63 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // Register function
-  const register = async (userData: {
+  const register = async ({
+    name,
+    email,
+    password,
+    role,
+    className, // display name (e.g. "Math 101")
+    classId, // unique ID used for backend linking (e.g. "Math101")
+  }: {
     name: string;
     email: string;
     password: string;
     role: "teacher" | "student";
+    className?: string;
+    classId?: string;
   }) => {
     setIsLoading(true);
     setError(null);
-    try {
-      const data = getLocalStorageUsers();
 
-      if (data.users.some((u: any) => u.email === userData.email)) {
-        const message = "Email already in use";
-        setError(message);
-        return { success: false, message };
+    try {
+      const endpoint =
+        role === "student"
+          ? "https://localhost:64060/api/students"
+          : "https://localhost:64060/api/teachers";
+
+      const body =
+        role === "student"
+          ? { name, email, password }
+          : { name, email, password, classId, className };
+
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        setError("Registration failed.");
+        return { success: false, message: "Registration failed." };
       }
 
-      const newUser = {
-        userId: Date.now().toString(),
-        name: userData.name,
-        email: userData.email,
-        password: userData.password,
-        role: userData.role,
-      };
-
-      data.users.push(newUser);
-      saveLocalStorageUsers(data);
-
+      const data = await res.json();
       const currentUser = {
-        userId: newUser.userId,
-        name: newUser.name,
-        email: newUser.email,
-        role: newUser.role,
+        userId: data.id ?? data.teacherId ?? data.classId,
+        name: data.name ?? name,
+        email,
+        role,
       };
 
       setUser(currentUser);
       setIsAuthenticated(true);
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      navigate(role === "teacher" ? "/" : "/");
 
-      navigate(newUser.role === "teacher" ? "/" : "/");
       return { success: true };
     } catch (error) {
-      const message = "Registration failed. Please try again.";
-      setError(message);
-      return { success: false, message };
+      setError("Something went wrong during registration.");
+      return { success: false, message: "Something went wrong." };
     } finally {
       setIsLoading(false);
     }

@@ -1,13 +1,17 @@
 {
   "Id": "98765",
-  "FirstName": "habar",
-  "LastName": "n am",
-  "Age": 19,
+  "Name": "Habar N-am",
   "Credentials": {
-    "Username": "student3",
+    "Username": "null",
     "Password": "password3",
-    "Email": "student3@email.com",
+    "Email": "habar@email.com",
     "UserType": "Student"
   },
-  "Grades": []
+  "Grades": [
+    {
+      "ClassId": "Bio202",
+      "Value": 8,
+      "Timestamp": "2025-04-01T16:08:11.6242799+03:00"
+    }
+  ]
 }

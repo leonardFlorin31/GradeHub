@@ -45,6 +45,29 @@ const LeftSidebar = () => {
               </li>
             );
           })}
+
+          {/* 👇 Role-based grade tab */}
+          {user.role === "student" && (
+            <li>
+              <NavLink
+                to="/my-grades"
+                className="flex gap-4 items-center p-4 rounded-lg base-medium hover:dark:bg-dm-secondary hover:bg-lm-primary hover:text-lm-light transition"
+              >
+                📊 My Grades
+              </NavLink>
+            </li>
+          )}
+
+          {user.role === "teacher" && (
+            <li>
+              <NavLink
+                to="/class-grades"
+                className="flex gap-4 items-center p-4 rounded-lg base-medium hover:dark:bg-dm-secondary hover:bg-lm-primary hover:text-lm-light transition"
+              >
+                🏫 Class Grades
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
 

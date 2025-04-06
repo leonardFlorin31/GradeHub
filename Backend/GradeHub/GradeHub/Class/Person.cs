@@ -3,46 +3,31 @@ namespace GradeHub.MainClasses;
 
 public class Person : IPerson
 {
-    private string _firstName;
-    private string _lastName;
-    private int _age;
+    private string _name;
     private UserCredentials _userCredentials;
 
-    public Person(string firstName, string lastName, int age)
+    public Person(string name)
     {
-        _firstName = firstName;
-        _lastName = lastName;
-        _age = age;
+        _name = name;
     }
-    
+
     public void SetUserCredentials(UserCredentials userCredentials)
     {
         _userCredentials = userCredentials;
     }
-    
+
     public UserCredentials GetUserCredentials()
     {
         return _userCredentials;
     }
 
-    public void SetName(string firstName, string lastName)
+    public void SetName(string name)
     {
-        _firstName = firstName;
-        _lastName = lastName;
+        _name = name;
     }
 
-    public (string firstName, string lastName) GetName()
+    public string GetName()
     {
-        return (_firstName, _lastName);
-    }
-
-    public void SetAge(int age)
-    {
-        _age = age;
-    }
-
-    public int GetAge()
-    {
-        return _age;
+        return _name;
     }
 }

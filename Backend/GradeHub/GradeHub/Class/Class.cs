@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GradeHub.Class
 {
@@ -25,11 +23,11 @@ namespace GradeHub.Class
             if (!Students.Contains(student))
             {
                 Students.Add(student);
-                Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} added to {ClassName}.");
+                Console.WriteLine($"{student.GetName()} added to {ClassName}.");
             }
             else
             {
-                Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} is already in {ClassName}.");
+                Console.WriteLine($"{student.GetName()} is already in {ClassName}.");
             }
         }
 
@@ -38,23 +36,23 @@ namespace GradeHub.Class
             if (Students.Contains(student))
             {
                 Students.Remove(student);
-                Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} removed from {ClassName}.");
+                Console.WriteLine($"{student.GetName()} removed from {ClassName}.");
             }
             else
             {
-                Console.WriteLine($"{student.GetName().firstName} {student.GetName().lastName} is not in {ClassName}.");
+                Console.WriteLine($"{student.GetName()} is not in {ClassName}.");
             }
         }
 
         public void BulkUploadGrades(string classId, List<(string studentId, int gradeValue)> grades)
         {
             Console.WriteLine($"\nStarting bulk grade upload for class: {ClassName} ({classId})");
+
             foreach (var gradeData in grades)
             {
                 var studentId = gradeData.studentId;
                 var gradeValue = gradeData.gradeValue;
 
-                // Grade Validation Logic
                 if (gradeValue > 0 && gradeValue <= 10)
                 {
                     var student = Students.FirstOrDefault(s => s.GetStudentId() == studentId);
@@ -63,7 +61,7 @@ namespace GradeHub.Class
                     {
                         var grade = new Grade(classId, gradeValue);
                         student.AddGradeToday(grade);
-                        Console.WriteLine($"  Uploaded grade {gradeValue} for student ID {studentId} ({student.GetName().firstName} {student.GetName().lastName}).");
+                        Console.WriteLine($"  Uploaded grade {gradeValue} for student ID {studentId} ({student.GetName()}).");
                     }
                     else
                     {
@@ -75,6 +73,7 @@ namespace GradeHub.Class
                     Console.WriteLine($"  Warning: Invalid grade value '{gradeValue}' for student ID {studentId}. Grade not uploaded.");
                 }
             }
+
             Console.WriteLine("Bulk grade upload complete.");
         }
     }

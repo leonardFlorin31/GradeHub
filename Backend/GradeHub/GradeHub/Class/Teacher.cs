@@ -5,11 +5,8 @@ public class Teacher : Person
 {
     public string ClassId { get; set; }
 
-    
-    public Teacher(string firstName, string lastName, int age, string classId) : base(firstName, lastName, age)
+    public Teacher(string name, string classId) : base(name)
     {
         ClassId = classId;
     }
-
-
 }

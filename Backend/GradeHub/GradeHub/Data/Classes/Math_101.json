@@ -1,5 +1,8 @@
 {
   "ClassName": "Math 101",
   "TeacherId": "Math101",
-  "StudentIds": []
+  "StudentIds": [
+    "12340",
+    "56789"
+  ]
 }

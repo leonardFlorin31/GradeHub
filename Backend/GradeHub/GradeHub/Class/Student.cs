@@ -9,7 +9,7 @@ public class Student : Person
     private List<GradeEntry> _gradeHistory;
     private string _studentId;
 
-    public Student(string firstName, string lastName, int age, string studentId) : base(firstName, lastName, age)
+    public Student(string name, string studentId) : base(name)
     {
         _studentId = studentId;
         _gradeHistory = new List<GradeEntry>();
@@ -44,7 +44,6 @@ public class Student : Person
         return _gradeHistory;
     }
 
-    // Kept for backward compatibility in the Main method's initial grade addition
     public Dictionary<DateTime, Grade> GetGrades()
     {
         return _gradeHistory.ToDictionary(entry => entry.Timestamp, entry => entry.Grade);
@@ -59,5 +58,4 @@ public class Student : Person
     {
         return _studentId;
     }
-
 }
