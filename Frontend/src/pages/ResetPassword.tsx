@@ -51,9 +51,9 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <div className="w-full max-w-md bg-white dark:bg-dm-dark shadow-md rounded-lg p-8">
-        <h1 className="text-2xl font-bold text-center text-rich-black mb-6">
+    <div className="w-full min-h-screen flex items-center justify-center px-4 bg-gray-50 dark:bg-dm-dark">
+      <div className="w-full max-w-md bg-white dark:bg-neutral-900 shadow-xl rounded-2xl p-8">
+        <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Reset Password
         </h1>
 
@@ -67,9 +67,11 @@ const ResetPassword = () => {
           </Alert>
         )}
 
-        <form onSubmit={handleReset} className="space-y-4">
+        <form onSubmit={handleReset} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Email
+            </label>
             <Input
               type="email"
               value={user.email}
@@ -79,7 +81,7 @@ const ResetPassword = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               New Password
             </label>
             <Input
