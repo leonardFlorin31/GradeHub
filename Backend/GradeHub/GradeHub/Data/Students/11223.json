@@ -1,11 +1,30 @@
 {
   "Id": "11223",
-  "Name": "test",
+  "Name": "Elena Smart",
   "Credentials": {
     "Username": "null",
+<<<<<<< Updated upstream
     "Password": "xSp09Ggzw/utZnt5E8ChnapB6kloeDEKq3bwfFWzUes=",
     "Email": "test",
     "UserType": "Student"
   },
   "Grades": []
+=======
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "elena@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "ClassId": "Bio202",
+      "Value": 6,
+      "Timestamp": "2025-04-07T18:49:07.5576474+03:00"
+    },
+    {
+      "ClassId": "Bio202",
+      "Value": 7,
+      "Timestamp": "2025-04-08T18:49:07.5576477+03:00"
+    }
+  ]
+>>>>>>> Stashed changes
 }

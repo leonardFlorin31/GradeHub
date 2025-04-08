@@ -48,8 +48,8 @@ const SigninForm = () => {
   const handleDemoLogin = (role: "teacher" | "student") => {
     clearError();
     const demoCredentials = {
-      teacher: { email: "teacher@example.com", password: "12345678" },
-      student: { email: "student@example.com", password: "12345678" },
+      teacher: { email: "bio@email.com", password: "12345678" },
+      student: { email: "raul@email.com", password: "12345678" },
     };
     form.setValue("email", demoCredentials[role].email);
     form.setValue("password", demoCredentials[role].password);

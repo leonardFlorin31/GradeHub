@@ -38,7 +38,7 @@ const ResetPassword = () => {
       } else {
         setStatus({ type: "success", message: data });
 
-        // ✅ Log out the user after reset
+        // Log out the user after reset
         logout();
 
         setTimeout(() => navigate("/sign-in"), 2000);

@@ -1,9 +1,9 @@
 {
   "Id": "56789",
-  "Name": "Raul The Horse",
+  "Name": "Raul The Horse Calul",
   "Credentials": {
     "Username": "null",
-    "Password": "parola",
+    "Password": "qAtWiiN/UDkdLx\u002BXvq\u002BZVk4z0uHIouXKwhztpwFXAxI=",
     "Email": "raul@email.com",
     "UserType": "Student"
   },
@@ -11,27 +11,27 @@
     {
       "ClassId": "Math101",
       "Value": 7,
-      "Timestamp": "2025-04-04T16:08:11.6241968+03:00"
+      "Timestamp": "2025-04-06T18:49:07.5575624+03:00"
     },
     {
       "ClassId": "Math101",
       "Value": 9,
-      "Timestamp": "2025-04-06T16:08:11.6242779+03:00"
+      "Timestamp": "2025-04-08T18:49:07.5576445+03:00"
     },
     {
       "ClassId": "CS303",
       "Value": 10,
-      "Timestamp": "2025-04-06T16:08:11.6242789+03:00"
+      "Timestamp": "2025-04-08T18:49:07.5576455+03:00"
     },
     {
       "ClassId": "Bio202",
       "Value": 8,
-      "Timestamp": "2025-04-05T16:08:11.624279+03:00"
+      "Timestamp": "2025-04-07T18:49:07.5576456+03:00"
     },
     {
       "ClassId": "Bio202",
       "Value": 9,
-      "Timestamp": "2025-04-06T16:08:11.6242793+03:00"
+      "Timestamp": "2025-04-08T18:49:07.5576458+03:00"
     }
   ]
 }

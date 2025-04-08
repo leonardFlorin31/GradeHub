@@ -15,6 +15,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
+
 // Create the web application builder
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,9 +81,10 @@ if (people.Count == 0 || classes.Count == 0)
 
     people.AddRange(new[] { teacher1, teacher2, teacher3 });
 
-    teacher1.SetUserCredentials(new UserCredentials("null", "password", "math@email.com", UserType.Teacher));
-    teacher2.SetUserCredentials(new UserCredentials("null", "password", "bio@email.com", UserType.Teacher));
-    teacher3.SetUserCredentials(new UserCredentials("null", "password", "cs@email.com", UserType.Teacher));
+    teacher1.SetUserCredentials(new UserCredentials("null", "12345678", "math@email.com", UserType.Teacher));
+    teacher2.SetUserCredentials(new UserCredentials("null", "12345678", "bio@email.com", UserType.Teacher));
+    teacher3.SetUserCredentials(new UserCredentials("null", "12345678", "cs@email.com", UserType.Teacher));
+
 
     // Students
     var student1 = new Student("George Bossu", "12340");
@@ -94,12 +96,14 @@ if (people.Count == 0 || classes.Count == 0)
 
     people.AddRange(new[] { student1, student2, student3, student4, student5, student6 });
 
-    student1.SetUserCredentials(new UserCredentials("null", "password1", "george@email.com", UserType.Student));
-    student2.SetUserCredentials(new UserCredentials("null", "password2", "raul@email.com", UserType.Student));
-    student3.SetUserCredentials(new UserCredentials("null", "password3", "habar@email.com", UserType.Student));
-    student4.SetUserCredentials(new UserCredentials("null", "password4", "elena@email.com", UserType.Student));
-    student5.SetUserCredentials(new UserCredentials("null", "password5", "ionut@email.com", UserType.Student));
-    student6.SetUserCredentials(new UserCredentials("null", "password6", "maria@email.com", UserType.Student));
+    student1.SetUserCredentials(new UserCredentials("null", "12345678", "george@email.com", UserType.Student));
+    student2.SetUserCredentials(new UserCredentials("null", "12345678", "raul@email.com", UserType.Student));
+    student3.SetUserCredentials(new UserCredentials("null", "12345678", "habar@email.com", UserType.Student));
+    student4.SetUserCredentials(new UserCredentials("null", "12345678", "elena@email.com", UserType.Student));
+    student5.SetUserCredentials(new UserCredentials("null", "12345678", "ionut@email.com", UserType.Student));
+    student6.SetUserCredentials(new UserCredentials("null", "12345678", "maria@email.com", UserType.Student));
+
+
 
     // Classes
     var class1 = new Class("Math 101", teacher1);
@@ -141,12 +145,6 @@ if (people.Count == 0 || classes.Count == 0)
     SaveAllData(people, classes);
 }
 
-static string HashPassword(string password)
-{
-    using var sha256 = SHA256.Create();
-    byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-    return Convert.ToBase64String(hashedBytes);
-}
 
 // Get reference to the first class (for demo purposes)
 var mathClass = classes.FirstOrDefault();
@@ -448,17 +446,28 @@ app.MapPost("/api/classes/{classId}/bulk-grades", (string classId, [FromBody] Bu
 
 // Authentication endpoint
 app.MapPost("/api/auth/login", ([FromBody] LoginDto login) => {
+    Console.WriteLine($"Login attempt for email: {login.Email}, {login.Password}"); // Debug log
+
     var person = people.FirstOrDefault(p =>
         p.GetUserCredentials()?.Email == login.Email);
 
     if (person == null)
+    {
+        Console.WriteLine("User not found");
         return Results.Unauthorized();
+    }
 
     var inputHash = HashPassword(login.Password);
     var storedHash = person.GetUserCredentials()?.PasswordHash;
 
+    Console.WriteLine(inputHash);
+    Console.WriteLine(storedHash);
+
     if (inputHash != storedHash)
-        return Results.Unauthorized();
+    { 
+       Console.WriteLine("Invalid password");
+       return Results.Unauthorized();
+    }
 
     var userType = person.GetUserCredentials()?.UserType;
     string role = userType == UserType.Teacher ? "Teacher" : "Student";

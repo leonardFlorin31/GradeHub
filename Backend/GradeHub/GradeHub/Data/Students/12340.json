@@ -3,7 +3,7 @@
   "Name": "George Bossu",
   "Credentials": {
     "Username": "null",
-    "Password": "password1",
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
     "Email": "george@email.com",
     "UserType": "Student"
   },
@@ -11,7 +11,7 @@
     {
       "ClassId": "Math101",
       "Value": 6,
-      "Timestamp": "2025-04-03T16:08:11.6211367+03:00"
+      "Timestamp": "2025-04-05T18:49:07.5537944+03:00"
     }
   ]
 }

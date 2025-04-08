@@ -3,7 +3,7 @@ import { useAuthContext } from "@/AuthContext";
 import { Pencil, UserCircle2 } from "lucide-react"; // optional icon
 
 const Profile = () => {
-  const { user, isAuthenticated, isLoading } = useAuthContext();
+  const { user, isAuthenticated, isLoading, setUser } = useAuthContext();
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -20,11 +20,34 @@ const Profile = () => {
     );
   }
 
-  const handleUpdate = (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Updated name:", name);
-    console.log("Updated email:", email);
-    setShowModal(false);
+
+    try {
+      const res = await fetch(
+        `https://localhost:64060/api/users/${user.userId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email }),
+        }
+      );
+
+      if (!res.ok) {
+        const msg = await res.text();
+        console.error("Update failed:", msg);
+        alert("Failed to update profile. " + msg);
+        return;
+      }
+
+      const updated = await res.json();
+
+      setUser({ ...user, name: updated.name, email: updated.email });
+      setShowModal(false);
+    } catch (err) {
+      console.error("Update error:", err);
+      alert("Something went wrong while updating your profile.");
+    }
   };
 
   return (
@@ -46,7 +69,11 @@ const Profile = () => {
 
         <div className="mt-10 flex justify-center">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setName(user.name);
+              setEmail(user.email);
+              setShowModal(true);
+            }}
             className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition shadow-sm"
           >
             <Pencil className="w-4 h-4" />
