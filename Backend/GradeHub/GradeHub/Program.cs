@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
+using System.Text;
+using System.Security.Cryptography;
 
 // Create the web application builder
 var builder = WebApplication.CreateBuilder(args);
@@ -139,6 +141,13 @@ if (people.Count == 0 || classes.Count == 0)
     SaveAllData(people, classes);
 }
 
+static string HashPassword(string password)
+{
+    using var sha256 = SHA256.Create();
+    byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+    return Convert.ToBase64String(hashedBytes);
+}
+
 // Get reference to the first class (for demo purposes)
 var mathClass = classes.FirstOrDefault();
 
@@ -157,7 +166,7 @@ app.MapPost("/api/auth/reset-password", ([FromBody] ResetPasswordDto dto) =>
         return Results.BadRequest("User does not have credentials");
 
     // Update password
-    credentials.Password = dto.NewPassword;
+    credentials.PasswordHash = HashPassword(dto.NewPassword);
 
     // Save user
     if (person is Student student)
@@ -457,10 +466,15 @@ app.MapPost("/api/classes/{classId}/bulk-grades", (string classId, [FromBody] Bu
 // Authentication endpoint
 app.MapPost("/api/auth/login", ([FromBody] LoginDto login) => {
     var person = people.FirstOrDefault(p =>
-        p.GetUserCredentials()?.Email == login.Email &&
-        p.GetUserCredentials()?.Password == login.Password);
+        p.GetUserCredentials()?.Email == login.Email);
 
     if (person == null)
+        return Results.Unauthorized();
+
+    var inputHash = HashPassword(login.Password);
+    var storedHash = person.GetUserCredentials()?.PasswordHash;
+
+    if (inputHash != storedHash)
         return Results.Unauthorized();
 
     var userType = person.GetUserCredentials()?.UserType;
@@ -494,7 +508,7 @@ void SaveStudentData(Student student)
         Credentials = student.GetUserCredentials() != null ? new StoredCredentialsDto
         {
             Username = student.GetUserCredentials().Username,
-            Password = student.GetUserCredentials().Password,
+            Password = student.GetUserCredentials().PasswordHash,
             Email = student.GetUserCredentials().Email,
             UserType = student.GetUserCredentials().UserType.ToString()
         } : null,
@@ -522,7 +536,7 @@ void SaveTeacherData(Teacher teacher)
         Credentials = teacher.GetUserCredentials() != null ? new StoredCredentialsDto
         {
             Username = teacher.GetUserCredentials().Username,
-            Password = teacher.GetUserCredentials().Password,
+            Password = teacher.GetUserCredentials().PasswordHash,
             Email = teacher.GetUserCredentials().Email,
             UserType = teacher.GetUserCredentials().UserType.ToString()
         } : null
