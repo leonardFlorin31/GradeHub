@@ -1,10 +1,10 @@
 {
   "Id": "11223",
-  "Name": "Elena Smart",
+  "Name": "test",
   "Credentials": {
     "Username": "null",
-    "Password": "password4",
-    "Email": "elena@email.com",
+    "Password": "uXhzpA9zq\u002B3Y1oWnzV5fheSpz7g\u002BrCaIZkCggThQEis=",
+    "Email": "test",
     "UserType": "Student"
   },
   "Grades": [

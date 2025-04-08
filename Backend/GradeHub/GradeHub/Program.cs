@@ -495,6 +495,47 @@ app.MapPost("/api/auth/login", ([FromBody] LoginDto login) => {
     });
 });
 
+app.MapPut("/api/users/{id}", (string id, [FromBody] UserUpdateDto updateDto) =>
+{
+    // Find user by student ID or teacher class ID
+    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
+    var teacher = people.OfType<Teacher>().FirstOrDefault(t => t.ClassId == id);
+
+    var user = (Person?)student ?? teacher;
+    if (user == null) return Results.NotFound("User not found");
+
+    // Update name if provided
+    if (!string.IsNullOrWhiteSpace(updateDto.Name))
+    {
+        user.SetName(updateDto.Name.Trim());
+    }
+
+    // Update email if provided
+    var credentials = user.GetUserCredentials();
+    if (!string.IsNullOrWhiteSpace(updateDto.Email))
+    {
+        if (credentials == null) return Results.BadRequest("User has no credentials");
+        credentials.Email = updateDto.Email.Trim();
+    }
+
+    // Save changes
+    if (user is Student s)
+    {
+        SaveStudentData(s);
+    }
+    else if (user is Teacher t)
+    {
+        SaveTeacherData(t);
+    }
+
+    return Results.Ok(new
+    {
+        Id = id,
+        Name = user.GetName(),
+        Email = credentials?.Email
+    });
+});
+
 
 // Helper methods for file-based storage
 
@@ -815,4 +856,10 @@ public class ResetPasswordDto
 {
     public string Email { get; set; }
     public string NewPassword { get; set; }
+}
+
+public class UserUpdateDto
+{
+    public string? Name { get; set; }
+    public string? Email { get; set; }
 }
