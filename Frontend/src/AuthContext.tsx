@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IContextType, ICurrentUser } from "./types";
-import { set } from "zod";
 
 export const INITIAL_USER = {
   userId: "",

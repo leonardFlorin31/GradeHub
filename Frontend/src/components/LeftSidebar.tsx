@@ -1,10 +1,9 @@
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../constants";
 import { INavLink } from "../types";
 import { useAuthContext } from "../AuthContext";
 
 const LeftSidebar = () => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
   const { user, logout } = useAuthContext();
 
