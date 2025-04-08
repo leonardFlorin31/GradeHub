@@ -389,6 +389,27 @@ app.MapGet("/api/students/{id}/grades", (string id) => {
     return Results.Ok(grades);
 });
 
+app.MapDelete("/api/students/{id}/grades/{value}", (string id, int value) =>
+{
+    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
+    if (student == null)
+        return Results.NotFound("Student not found");
+
+    if (value < 1 || value > 10)
+        return Results.BadRequest("Grade value must be between 1 and 10");
+
+    var gradeEntry = student.GetGradeHistory()
+        .FirstOrDefault(g => g.Grade.GradeValue == value);
+
+    if (gradeEntry == null)
+        return Results.NotFound($"No grade with value {value} found");
+
+    student.RemoveFirstGradeByValue(value);
+    SaveStudentData(student);
+
+    return Results.NoContent();
+});
+
 app.MapPost("/api/students/{id}/grades", (string id, [FromBody] GradeDto gradeDto) => {
     var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
     if (student == null)

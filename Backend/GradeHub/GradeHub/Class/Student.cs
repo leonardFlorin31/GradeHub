@@ -58,4 +58,13 @@ public class Student : Person
     {
         return _studentId;
     }
+
+    public void RemoveFirstGradeByValue(int value)
+    {
+        var gradeToRemove = _gradeHistory.FirstOrDefault(g => g.Grade.GradeValue == value);
+        if (gradeToRemove != null)
+        {
+            _gradeHistory.Remove(gradeToRemove);
+        }
+    }
 }
