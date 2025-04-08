@@ -3,15 +3,9 @@
   "Name": "test",
   "Credentials": {
     "Username": "null",
-    "Password": "uXhzpA9zq\u002B3Y1oWnzV5fheSpz7g\u002BrCaIZkCggThQEis=",
+    "Password": "xSp09Ggzw/utZnt5E8ChnapB6kloeDEKq3bwfFWzUes=",
     "Email": "test",
     "UserType": "Student"
   },
-  "Grades": [
-    {
-      "ClassId": "Bio202",
-      "Value": 7,
-      "Timestamp": "2025-04-06T16:08:11.6242804+03:00"
-    }
-  ]
+  "Grades": []
 }

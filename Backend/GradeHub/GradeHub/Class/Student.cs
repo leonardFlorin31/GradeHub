@@ -67,4 +67,15 @@ public class Student : Person
             _gradeHistory.Remove(gradeToRemove);
         }
     }
+
+    public bool RemoveGradeById(Guid gradeId)
+    {
+        var gradeToRemove = _gradeHistory.FirstOrDefault(g => g.Id == gradeId);
+        if (gradeToRemove != null)
+        {
+            _gradeHistory.Remove(gradeToRemove);
+            return true;
+        }
+        return false;
+    }
 }

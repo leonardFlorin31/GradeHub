@@ -2,6 +2,7 @@
 
 public class Grade
 {
+    
     public string ClassId { get; set; }
     public int GradeValue { get; set; }
     

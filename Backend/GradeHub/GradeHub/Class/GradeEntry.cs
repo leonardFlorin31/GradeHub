@@ -10,6 +10,7 @@ namespace GradeHub.Class
 {
     public class GradeEntry
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public DateTime Timestamp { get; private set; }
         public Grade Grade { get; private set; }
 

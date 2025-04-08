@@ -188,16 +188,19 @@ app.MapGet("/api/students", () => {
 });
 
 
-app.MapGet("/api/students/{id}", (string id) => {
+app.MapGet("/api/students/{id}/grades", (string id) => {
     var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
     if (student == null)
         return Results.NotFound();
 
-    return Results.Ok(new
-    {
-        Id = student.GetStudentId(),
-        Name = student.GetName()
+    var grades = student.GetGradeHistory().Select(g => new {
+        Id = g.Id,
+        ClassId = g.Grade.ClassId,
+        Value = g.Grade.GradeValue,
+        Date = g.Timestamp
     });
+
+    return Results.Ok(grades);
 });
 
 
@@ -383,39 +386,19 @@ app.MapPost("/api/classes/{className}/students/{studentId}", (string className, 
     return Results.NoContent();
 });
 
-// Grades endpoints
-app.MapGet("/api/students/{id}/grades", (string id) => {
-    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
-    if (student == null)
-        return Results.NotFound();
-    
-    var grades = student.GetGradeHistory().Select(g => new {
-        ClassId = g.Grade.ClassId,
-        Value = g.Grade.GradeValue,
-        Date = g.Timestamp
-    });
-    
-    return Results.Ok(grades);
-});
 
-app.MapDelete("/api/students/{id}/grades/{value}", (string id, int value) =>
+app.MapDelete("/api/students/{studentId}/grades/{gradeId}", (string studentId, Guid gradeId) =>
 {
-    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == id);
+    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == studentId);
     if (student == null)
         return Results.NotFound("Student not found");
 
-    if (value < 1 || value > 10)
-        return Results.BadRequest("Grade value must be between 1 and 10");
+    var success = student.RemoveGradeById(gradeId);
 
-    var gradeEntry = student.GetGradeHistory()
-        .FirstOrDefault(g => g.Grade.GradeValue == value);
+    if (!success)
+        return Results.NotFound("Grade not found");
 
-    if (gradeEntry == null)
-        return Results.NotFound($"No grade with value {value} found");
-
-    student.RemoveFirstGradeByValue(value);
     SaveStudentData(student);
-
     return Results.NoContent();
 });
 
@@ -840,6 +823,7 @@ public class StoredCredentialsDto
 
 public class StoredGradeDto
 {
+    public Guid Id { get; set; }
     public string ClassId { get; set; }
     public int Value { get; set; }
     public DateTime Timestamp { get; set; }
