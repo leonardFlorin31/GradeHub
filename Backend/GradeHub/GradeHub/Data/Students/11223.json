@@ -1,0 +1,24 @@
+{
+  "Id": "11223",
+  "Name": "Elena Smart",
+  "Credentials": {
+    "Username": "null",
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "elena@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "Id": "4798a1ab-2dd4-4241-9a4e-d9e0f966f679",
+      "ClassId": "Bio202",
+      "Value": 6,
+      "Timestamp": "2025-04-07T20:41:24.8123739+03:00"
+    },
+    {
+      "Id": "bfda35a7-7c37-4ad6-b5db-3a682b304865",
+      "ClassId": "Bio202",
+      "Value": 7,
+      "Timestamp": "2025-04-08T20:41:24.8123742+03:00"
+    }
+  ]
+}

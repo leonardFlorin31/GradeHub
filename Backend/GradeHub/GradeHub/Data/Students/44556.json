@@ -1,0 +1,30 @@
+{
+  "Id": "44556",
+  "Name": "Ionut Coder",
+  "Credentials": {
+    "Username": "null",
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "ionut@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "Id": "557dcbb1-7472-41eb-8650-69a6b3650621",
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-08T20:53:37.4704562+03:00"
+    },
+    {
+      "Id": "c3111846-5912-4d24-97ff-6a294602f196",
+      "ClassId": "CS303",
+      "Value": 7,
+      "Timestamp": "2025-04-08T20:53:41.6047776+03:00"
+    },
+    {
+      "Id": "5a4d45c3-300a-4a02-ba34-1c82dfd92352",
+      "ClassId": "CS303",
+      "Value": 8,
+      "Timestamp": "2025-04-08T20:53:43.2528739+03:00"
+    }
+  ]
+}

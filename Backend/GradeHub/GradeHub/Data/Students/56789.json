@@ -1,0 +1,48 @@
+{
+  "Id": "56789",
+  "Name": "Raul The Horse",
+  "Credentials": {
+    "Username": "null",
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "raul@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "Id": "c744784b-5edc-49ba-9cf1-5c5595ac7013",
+      "ClassId": "Math101",
+      "Value": 7,
+      "Timestamp": "2025-04-06T20:41:24.8122826+03:00"
+    },
+    {
+      "Id": "03e9fe08-f456-4674-987f-eef3e27d28bf",
+      "ClassId": "Math101",
+      "Value": 9,
+      "Timestamp": "2025-04-08T20:41:24.8123695+03:00"
+    },
+    {
+      "Id": "b9ddf7e9-45dd-4c11-9243-0432bd4eda3f",
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-08T20:41:24.812372+03:00"
+    },
+    {
+      "Id": "21025792-214e-49e9-b7b1-fe46468ab58d",
+      "ClassId": "Bio202",
+      "Value": 8,
+      "Timestamp": "2025-04-07T20:41:24.8123722+03:00"
+    },
+    {
+      "Id": "f6104faf-b5f6-43a7-9201-6663cca4f75b",
+      "ClassId": "Bio202",
+      "Value": 9,
+      "Timestamp": "2025-04-08T20:41:24.8123726+03:00"
+    },
+    {
+      "Id": "b7efe4ef-f392-4fec-97fa-fb28fcafb47b",
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-08T21:05:32.3032085+03:00"
+    }
+  ]
+}

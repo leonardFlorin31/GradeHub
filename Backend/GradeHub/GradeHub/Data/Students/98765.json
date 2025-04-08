@@ -1,0 +1,18 @@
+{
+  "Id": "98765",
+  "Name": "Habar N-am",
+  "Credentials": {
+    "Username": "null",
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "habar@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "Id": "9fa87bf3-7ae6-44d6-9930-f2580673a845",
+      "ClassId": "Bio202",
+      "Value": 8,
+      "Timestamp": "2025-04-03T20:41:24.8123733+03:00"
+    }
+  ]
+}

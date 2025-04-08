@@ -19,7 +19,7 @@ public class Student : Person
     {
         if (grade.GradeValue > 0 && grade.GradeValue <= 10)
         {
-            _gradeHistory.Add(new GradeEntry(timestamp, grade));
+            _gradeHistory.Add(new GradeEntry(timestamp, grade)); // auto-ID
         }
         else
         {
@@ -27,11 +27,17 @@ public class Student : Person
         }
     }
 
+    public void AddGrade(GradeEntry entry)
+    {
+        _gradeHistory.Add(entry);
+    }
+
+
     public void AddGradeToday(Grade grade)
     {
         if (grade.GradeValue > 0 && grade.GradeValue <= 10)
         {
-            _gradeHistory.Add(new GradeEntry(DateTime.Now, grade));
+            _gradeHistory.Add(new GradeEntry(DateTime.Now, grade)); // auto-ID
         }
         else
         {

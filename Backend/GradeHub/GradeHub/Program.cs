@@ -547,10 +547,12 @@ void SaveStudentData(Student student)
         } : null,
         Grades = student.GetGradeHistory().Select(g => new StoredGradeDto
         {
+            Id = g.Id, // <-- Add this
             ClassId = g.Grade.ClassId,
             Value = g.Grade.GradeValue,
             Timestamp = g.Timestamp
         }).ToList()
+
     };
 
     var filePath = Path.Combine(studentsDirectory, $"{student.GetStudentId()}.json");
@@ -699,7 +701,8 @@ void LoadData(out List<Person> people, out List<Class> classes)
                     foreach (var gradeDto in studentDto.Grades)
                     {
                         var grade = new Grade(gradeDto.ClassId, gradeDto.Value);
-                        student.AddGrade(gradeDto.Timestamp, grade);
+                        var entry = new GradeEntry(gradeDto.Id, gradeDto.Timestamp, grade);
+                        student.AddGrade(entry);
                     }
                 }
 

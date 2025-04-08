@@ -1,8 +1,45 @@
 import { useEffect, useState } from "react";
+import GradeManager from "./GradeManager";
 
 const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
   const [classes, setClasses] = useState<any[]>([]);
   const [studentGrades, setStudentGrades] = useState<Record<string, any[]>>({});
+  const [newGrades, setNewGrades] = useState<Record<string, number>>({});
+
+  const handleGradeChange = (studentId: string, value: string) => {
+    setNewGrades((prev) => ({
+      ...prev,
+      [studentId]: Number(value),
+    }));
+  };
+
+  const handleAddGrade = async (studentId: string, classId: string) => {
+    const value = newGrades[studentId];
+    if (!value || value < 1 || value > 10) {
+      alert("Please enter a grade between 1 and 10");
+      return;
+    }
+
+    const res = await fetch(
+      `https://localhost:64060/api/students/${studentId}/grades`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ classId, value }),
+      }
+    );
+
+    if (res.ok) {
+      const updatedGrade = await res.json();
+      setStudentGrades((prev) => ({
+        ...prev,
+        [studentId]: [...(prev[studentId] || []), updatedGrade],
+      }));
+      setNewGrades((prev) => ({ ...prev, [studentId]: 0 }));
+    } else {
+      alert("Failed to add grade.");
+    }
+  };
 
   useEffect(() => {
     fetch("https://localhost:64060/api/classes")
@@ -32,7 +69,7 @@ const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
   }, [teacherId]);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 w-[35%] mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center text-white">
         Class Grades Overview
       </h2>
@@ -46,7 +83,7 @@ const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
               {cls.className}
             </h3>
 
-            <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
+            <div className="overflow-y-auto max-h-[80vh] rounded-lg shadow border border-gray-200">
               <table className="min-w-full divide-y divide-gray-200 bg-white dark:bg-dm-dark">
                 <thead className="bg-gray-100 text-left">
                   <tr>
@@ -56,39 +93,30 @@ const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
                     <th className="px-4 py-3 text-sm font-semibold text-gray-700">
                       Student ID
                     </th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                      Grades
-                    </th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-700">
-                      Dates
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {cls.students.map((student: any) => {
-                    const grades = studentGrades[student.id] || [];
-                    const values = grades.map((g: any) => g.value).join(", ");
-                    const dates = grades
-                      .map((g: any) =>
-                        new Date(g.date).toLocaleDateString("en-GB")
-                      )
-                      .join(", ");
-
                     return (
-                      <tr key={student.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-2 font-medium">
-                          {student.name}
-                        </td>
-                        <td className="px-4 py-2 text-sm text-gray-600">
-                          {student.id}
-                        </td>
-                        <td className="px-4 py-2 text-bice-blue font-bold">
-                          {values || "-"}
-                        </td>
-                        <td className="px-4 py-2 text-sm text-gray-600">
-                          {dates || "-"}
-                        </td>
-                      </tr>
+                      <>
+                        <tr key={student.id} className="hover:bg-gray-50">
+                          <td className="px-4 py-2 font-medium">
+                            {student.name}
+                          </td>
+                          <td className="px-4 py-2 text-sm text-gray-600">
+                            {student.id}
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td colSpan={4} className="p-2 bg-gray-50">
+                            <GradeManager
+                              studentId={student.id}
+                              classId={teacherId}
+                            />
+                          </td>
+                        </tr>
+                      </>
                     );
                   })}
                 </tbody>

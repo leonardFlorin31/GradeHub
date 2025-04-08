@@ -14,8 +14,16 @@ namespace GradeHub.Class
         public DateTime Timestamp { get; private set; }
         public Grade Grade { get; private set; }
 
+        public GradeEntry(Guid id, DateTime timestamp, Grade grade)
+        {
+            Id = id;
+            Timestamp = timestamp;
+            Grade = grade;
+        }
+
         public GradeEntry(DateTime timestamp, Grade grade)
         {
+            Id = Guid.NewGuid(); // new ID for new entries
             Timestamp = timestamp;
             Grade = grade;
         }
