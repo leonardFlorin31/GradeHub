@@ -20,8 +20,7 @@ function App() {
         </Route>
 
         <Route element={<RootLayout />}>
-          <Route index element={<Home />} />
-          {/* <Route path="/profile/:id/*" element={<Profile />} /> */}
+          <Route index element={<Profile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-grades" element={<GradesPage />} />
           <Route path="/class-grades" element={<GradesPage />} />

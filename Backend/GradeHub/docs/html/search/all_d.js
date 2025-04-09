@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['savealldata_0',['SaveAllData',['../_program_8cs.html#ac53e5bcbd140c035e5b7bef816662ddb',1,'Program.cs']]],
+  ['saveclassdata_1',['SaveClassData',['../_program_8cs.html#add8c0efbf32ded5a19cd6b5dc0793eb8',1,'Program.cs']]],
+  ['savestudentdata_2',['SaveStudentData',['../_program_8cs.html#a8ccfaba3f758736f93daa3e09d1b7b89',1,'Program.cs']]],
+  ['saveteacherdata_3',['SaveTeacherData',['../_program_8cs.html#a21946e8d8854757a8879fe16d65c3c3c',1,'Program.cs']]],
+  ['set_4',['set',['../class_grade_hub_1_1_class_1_1_class.html#a527aa69db55f016f3b2f97ba5a579759',1,'GradeHub::Class::Class::set'],['../class_grade_hub_1_1_main_classes_1_1_grade.html#a57a53c198899d1f3016109d180e817bb',1,'GradeHub::MainClasses::Grade::set'],['../class_grade_hub_1_1_main_classes_1_1_teacher.html#adba773e576de0fa53696718c1b8ba501',1,'GradeHub::MainClasses::Teacher::set'],['../class_student_dto.html#ace8c221563ca3395969a34e0612bb563',1,'StudentDto::set'],['../class_bulk_grade_upload_dto.html#a51c615eb6fa58c2389aea5114a05a6a7',1,'BulkGradeUploadDto::set'],['../class_bulk_grade_upload_dto_1_1_grade_item.html#ae70c5d09051737cd04bc248cd2648a14',1,'BulkGradeUploadDto::GradeItem::set'],['../class_teacher_dto.html#ada51ec32c5bdc122cb1e2928a21b6304',1,'TeacherDto::set'],['../class_stored_student_dto.html#ab33408fa304beb921134eb22ffe32b9e',1,'StoredStudentDto::set'],['../class_stored_credentials_dto.html#a2ce2a91ef88195e44e54682f19729446',1,'StoredCredentialsDto::set'],['../class_stored_class_dto.html#a9bdb318d9c80833cb98eada59d392d21',1,'StoredClassDto::set'],['../class_user_update_dto.html#a838944fa5ecdc0b027afdba923e8c6ab',1,'UserUpdateDto::set'],['../class_grade_hub_1_1_user_credentials.html#a02fa7576a65cbb51394c084cf5a8a752',1,'GradeHub::UserCredentials::set'],['../_program_8cs.html#a112a711f766db446c2f517b794a1c04a',1,'set:&#160;Program.cs']]],
+  ['setname_5',['SetName',['../class_grade_hub_1_1_main_classes_1_1_person.html#a9fed425450810c08cf72233264687a25',1,'GradeHub::MainClasses::Person']]],
+  ['setstudentid_6',['SetStudentId',['../class_grade_hub_1_1_main_classes_1_1_student.html#a4100d3a600f0ea457dc5b6cfa6064eb2',1,'GradeHub::MainClasses::Student']]],
+  ['setusercredentials_7',['SetUserCredentials',['../class_grade_hub_1_1_main_classes_1_1_person.html#a01561e42a32ac514a68af56848bbec39',1,'GradeHub::MainClasses::Person']]],
+  ['storedclassdto_8',['StoredClassDto',['../class_stored_class_dto.html',1,'']]],
+  ['storedcredentialsdto_9',['StoredCredentialsDto',['../class_stored_credentials_dto.html',1,'']]],
+  ['storedstudentdto_10',['StoredStudentDto',['../class_stored_student_dto.html',1,'']]],
+  ['student_11',['Student',['../class_grade_hub_1_1_main_classes_1_1_student.html',1,'GradeHub::MainClasses::Student'],['../class_grade_hub_1_1_main_classes_1_1_student.html#a2290dd2283fb6ebda822fb8cbdc3f460',1,'GradeHub::MainClasses::Student::Student()'],['../namespace_grade_hub.html#a29fa483e6ca3dfb4637cc2865d945203',1,'GradeHub::Student']]],
+  ['student_2ecs_12',['Student.cs',['../_student_8cs.html',1,'']]],
+  ['studentdto_13',['StudentDto',['../class_student_dto.html',1,'']]],
+  ['studentid_14',['StudentId',['../class_bulk_grade_upload_dto_1_1_grade_item.html#ade4d935015c4ba9b5ae93c1738139698',1,'BulkGradeUploadDto::GradeItem']]],
+  ['studentids_15',['StudentIds',['../class_stored_class_dto.html#a4d7965000eab00bc0eb1fddc44d33d4d',1,'StoredClassDto::StudentIds'],['../_program_8cs.html#a098b12abcf9427d34a8033f7c1940b22',1,'StudentIds:&#160;Program.cs']]],
+  ['students_16',['Students',['../class_grade_hub_1_1_class_1_1_class.html#a83905bd11b88935cae163dd38325de62',1,'GradeHub::Class::Class']]],
+  ['studentsdirectory_17',['studentsDirectory',['../_program_8cs.html#aca771220f79fabf54cff3158988c9eef',1,'Program.cs']]]
+];

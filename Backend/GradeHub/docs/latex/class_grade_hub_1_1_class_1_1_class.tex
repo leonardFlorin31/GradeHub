@@ -1,0 +1,146 @@
+\doxysection{Grade\+Hub\+::Class\+::Class Class Reference}
+\hypertarget{class_grade_hub_1_1_class_1_1_class}{}\label{class_grade_hub_1_1_class_1_1_class}\index{GradeHub::Class::Class@{GradeHub::Class::Class}}
+
+
+Represents a school class with a name, a teacher, and a list of assigned students.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a9d1857227e6be8c4e25df0b9696250a4}{Class}} (string class\+Name, \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a52b54f764c300c374a9d99f700ea92f8}{Teacher}} teacher)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_grade_hub_1_1_class_1_1_class}{Class} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_ab7fd85f50cbfb2c2d134c2c589e484aa}{Add\+Student}} (\mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}} student)
+\begin{DoxyCompactList}\small\item\em Adds a student to the class if they are not already assigned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_afa83fa928aec750c9486598c3165ccdd}{Remove\+Student}} (\mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}} student)
+\begin{DoxyCompactList}\small\item\em Removes a student from the class if they are currently assigned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a7eee23a914e899c38b8f439fbef06826}{Bulk\+Upload\+Grades}} (string class\+Id, List$<$(string student\+Id, int grade\+Value)$>$ grades)
+\begin{DoxyCompactList}\small\item\em Uploads multiple grades at once for students in this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a45e72c24f4e5b57d3c72813e16e58a27}{Class\+Name}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the name of the class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a527aa69db55f016f3b2f97ba5a579759}{set}}
+\item 
+Teacher \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a52b54f764c300c374a9d99f700ea92f8}{Teacher}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the teacher assigned to this class. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}} $>$ \mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a83905bd11b88935cae163dd38325de62}{Students}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\begin{DoxyCompactList}\small\item\em Gets the list of students assigned to this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a school class with a name, a teacher, and a list of assigned students. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a9d1857227e6be8c4e25df0b9696250a4}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!Class@{Class}}
+\index{Class@{Class}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{Class()}{Class()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a9d1857227e6be8c4e25df0b9696250a4} 
+Grade\+Hub\+::\+Class\+::\+Class\+::\+Class (\begin{DoxyParamCaption}\item[{string}]{class\+Name}{, }\item[{\mbox{\hyperlink{class_grade_hub_1_1_class_1_1_class_a52b54f764c300c374a9d99f700ea92f8}{Teacher}}}]{teacher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \doxylink{class_grade_hub_1_1_class_1_1_class}{Class} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em class\+Name} & The name of the class.\\
+\hline
+{\em teacher} & The teacher assigned to the class.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_ab7fd85f50cbfb2c2d134c2c589e484aa}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!AddStudent@{AddStudent}}
+\index{AddStudent@{AddStudent}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{AddStudent()}{AddStudent()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_ab7fd85f50cbfb2c2d134c2c589e484aa} 
+void Grade\+Hub\+::\+Class\+::\+Class\+::\+Add\+Student (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}}}]{student}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a student to the class if they are not already assigned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student} & The student to add.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a7eee23a914e899c38b8f439fbef06826}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!BulkUploadGrades@{BulkUploadGrades}}
+\index{BulkUploadGrades@{BulkUploadGrades}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{BulkUploadGrades()}{BulkUploadGrades()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a7eee23a914e899c38b8f439fbef06826} 
+void Grade\+Hub\+::\+Class\+::\+Class\+::\+Bulk\+Upload\+Grades (\begin{DoxyParamCaption}\item[{string}]{class\+Id}{, }\item[{List$<$(string student\+Id, int grade\+Value)$>$}]{grades}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Uploads multiple grades at once for students in this class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em class\+Id} & The ID of the class these grades belong to.\\
+\hline
+{\em grades} & A list of tuples containing student IDs and grade values.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_afa83fa928aec750c9486598c3165ccdd}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!RemoveStudent@{RemoveStudent}}
+\index{RemoveStudent@{RemoveStudent}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{RemoveStudent()}{RemoveStudent()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_afa83fa928aec750c9486598c3165ccdd} 
+void Grade\+Hub\+::\+Class\+::\+Class\+::\+Remove\+Student (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}}}]{student}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a student from the class if they are currently assigned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student} & The student to remove.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a45e72c24f4e5b57d3c72813e16e58a27}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!ClassName@{ClassName}}
+\index{ClassName@{ClassName}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{ClassName}{ClassName}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a45e72c24f4e5b57d3c72813e16e58a27} 
+string Grade\+Hub\+::\+Class\+::\+Class\+::\+Class\+Name \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+
+
+Gets or sets the name of the class. 
+
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a527aa69db55f016f3b2f97ba5a579759}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!set@{set}}
+\index{set@{set}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{set}{set}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a527aa69db55f016f3b2f97ba5a579759} 
+Grade\+Hub\+::\+Class\+::\+Class\+::set}
+
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a83905bd11b88935cae163dd38325de62}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!Students@{Students}}
+\index{Students@{Students}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{Students}{Students}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a83905bd11b88935cae163dd38325de62} 
+List$<$\mbox{\hyperlink{namespace_grade_hub_a29fa483e6ca3dfb4637cc2865d945203}{Student}}$>$ Grade\+Hub\+::\+Class\+::\+Class\+::\+Students \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+
+
+Gets the list of students assigned to this class. 
+
+\Hypertarget{class_grade_hub_1_1_class_1_1_class_a52b54f764c300c374a9d99f700ea92f8}\index{GradeHub::Class::Class@{GradeHub::Class::Class}!Teacher@{Teacher}}
+\index{Teacher@{Teacher}!GradeHub::Class::Class@{GradeHub::Class::Class}}
+\doxysubsubsection{\texorpdfstring{Teacher}{Teacher}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_class_1_1_class_a52b54f764c300c374a9d99f700ea92f8} 
+Teacher Grade\+Hub\+::\+Class\+::\+Class\+::\+Teacher \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+
+
+Gets or sets the teacher assigned to this class. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Grade\+Hub/\+Class/\mbox{\hyperlink{_class_8cs}{Class.\+cs}}\end{DoxyCompactItemize}

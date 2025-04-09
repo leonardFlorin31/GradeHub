@@ -1,0 +1,473 @@
+\doxysection{Grade\+Hub/\+Program.cs File Reference}
+\hypertarget{_program_8cs}{}\label{_program_8cs}\index{GradeHub/Program.cs@{GradeHub/Program.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_student_dto}{Student\+Dto}}
+\item 
+class \mbox{\hyperlink{class_bulk_grade_upload_dto}{Bulk\+Grade\+Upload\+Dto}}
+\item 
+class \mbox{\hyperlink{class_bulk_grade_upload_dto_1_1_grade_item}{Bulk\+Grade\+Upload\+Dto\+::\+Grade\+Item}}
+\item 
+class \mbox{\hyperlink{class_teacher_dto}{Teacher\+Dto}}
+\item 
+class \mbox{\hyperlink{class_stored_student_dto}{Stored\+Student\+Dto}}
+\item 
+class \mbox{\hyperlink{class_stored_credentials_dto}{Stored\+Credentials\+Dto}}
+\item 
+class \mbox{\hyperlink{class_stored_class_dto}{Stored\+Class\+Dto}}
+\item 
+class \mbox{\hyperlink{class_user_update_dto}{User\+Update\+Dto}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services \mbox{\hyperlink{_program_8cs_aff914b90223e4a23979ebaa1a65e95f9}{Add\+Cors}} (options=$>$ \{ options.\+Add\+Policy("{}Allow\+Frontend"{}, policy=$>$ \{ policy.\+With\+Origins("{}http\+://localhost\+:5173"{}) .Allow\+Any\+Header() .Allow\+Any\+Method();\});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services \mbox{\hyperlink{_program_8cs_a2e633178c200863f89863cddcd887cbf}{Add\+Endpoints\+Api\+Explorer}} ()
+\item 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services \mbox{\hyperlink{_program_8cs_a5241f492c8fad4f8ab0076c752f4c28d}{Add\+Swagger\+Gen}} ()
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a0462fe86f731cd04d4129e3561272216}{Use\+Cors}} ("{}Allow\+Frontend"{})
+\item 
+\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}} (app.\+Environment.\+Is\+Development())
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a040d8258361a7667b440292147b5a44a}{Use\+Https\+Redirection}} ()
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_af128afc79f8df79ee9333c4d208679ef}{Map\+Get}} ("{}/"{},()=$>$ Results.\+Redirect("{}/swagger"{}))
+\item 
+Directory \mbox{\hyperlink{_program_8cs_a2be4b6c058695534503204854683d024}{Create\+Directory}} (\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}})
+\item 
+Directory \mbox{\hyperlink{_program_8cs_a9a611db0a1159de573fec22063c339cd}{Create\+Directory}} (\mbox{\hyperlink{_program_8cs_aca771220f79fabf54cff3158988c9eef}{students\+Directory}})
+\item 
+Directory \mbox{\hyperlink{_program_8cs_a5b1322f0650fd3e9ad547695580335d1}{Create\+Directory}} (\mbox{\hyperlink{_program_8cs_a589703c79a46ab97e0870a4691dbbc71}{teachers\+Directory}})
+\item 
+Directory \mbox{\hyperlink{_program_8cs_a99e1d9052fdceb4afe203b23efe26ae1}{Create\+Directory}} (\mbox{\hyperlink{_program_8cs_a664adebf70dba89b25fadef9293d7631}{classes\+Directory}})
+\item 
+\mbox{\hyperlink{_program_8cs_adf62abdced3a805e4f1e4a36afa45db3}{Load\+Data}} (out \mbox{\hyperlink{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192}{people}}, out \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}})
+\item 
+\mbox{\hyperlink{_program_8cs_a5c2c66b7c17bdadf9f73c42d77059a0d}{if}} (people.\+Count==0\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}classes.\+Count==0)
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a6f4a7a6b36e81fdc1a84031ed28a4d4e}{Map\+Post}} ("{}/api/auth/reset-\/password"{},(\mbox{[}From\+Body\mbox{]} Reset\+Password\+Dto dto)=$>$ \{ var person=people.\+First\+Or\+Default(p=$>$ p.\+Get\+User\+Credentials()?.Email==dto.\+Email);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person==null) return Results.\+Not\+Found("{}User with this email not found"{});var credentials=person.\+Get\+User\+Credentials();\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(credentials==null) return Results.\+Bad\+Request("{}User does not have credentials"{});credentials.\+Password\+Hash=Hash\+Password(\mbox{\hyperlink{_program_8cs_a162e1c788d6f455f2dd6ee8ce76c7131}{dto.\+New\+Password}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Student student) \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Teacher teacher) \mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(teacher);return Results.\+Ok("{}Password reset successfully"{});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a6fa1a0836f6fc91d13969241ceb2b8ab}{Map\+Get}} ("{}/api/students"{},()=$>$ \{ var students=people.\+Of\+Type$<$ Student $>$().Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \});return students;\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a3063557278156ef21dc465d6a116b495}{Map\+Get}} ("{}/api/students/\{id\}/grades"{},(string id)=$>$ \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found();var grades=student.\+Get\+Grade\+History().Select(g=$>$ new \{ Id=g.\+Id, \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{g.\+Grade.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{Value}}=g.\+Grade.\+Grade\+Value, Date=\mbox{\hyperlink{_program_8cs_ad61a3202df3c958377a1f7d95cfebb46}{g.\+Timestamp}} \});return Results.\+Ok(grades);\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_ad0b750b35a6be4e8f0d0a76d8d10908f}{Map\+Post}} ("{}/api/students"{},(\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_student_dto}{Student\+Dto}} student\+Dto)=$>$ \{ var generated\+Id=Guid.\+New\+Guid().To\+String();var student=new Student(student\+Dto.\+Name, generated\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+Empty(student\+Dto.\+Email) \&\&!string.\+Is\+Null\+Or\+Empty(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{student\+Dto.\+Password}})) \{ var credentials=new User\+Credentials(username\+:null!, \mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{password\+:student\+Dto.\+Password}}, email\+:student\+Dto.\+Email, user\+Type\+:\+User\+Type.\+Student);student.\+Set\+User\+Credentials(credentials);\} people.\+Add(student);\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+Created(\$"{}/api/students/\{student.\+Get\+Student\+Id()\}"{}, new \{ Id=student.\+Get\+Student\+Id(), Name=student.\+Get\+Name() \});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a840f0b47a023ba1f1e9fb43d1d256c43}{Map\+Delete}} ("{}/api/students/\{id\}"{},(string id)=$>$ \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found();people.\+Remove(student);foreach(var cls in \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}) \{ \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(cls.\+Students.\+Contains(student)) \{ cls.\+Students.\+Remove(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(cls);\} \} \mbox{\hyperlink{_program_8cs_a81d52bf34beefa98e896d269545f3522}{Delete\+Student\+Data}}(id);return Results.\+No\+Content();\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a1423d1e1a5b9f1baf745b1128a36c83f}{Map\+Get}} ("{}/api/teachers"{},()=$>$ \{ var teachers=people.\+Of\+Type$<$ Teacher $>$().Select(t=$>$ new \{ Name=t.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}} \});return teachers;\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a514f8766dd2b4c3327be71dafd45fd0e}{Map\+Post}} ("{}/api/teachers"{},(\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_teacher_dto}{Teacher\+Dto}} teacher\+Dto)=$>$ \{ var teacher=new Teacher(teacher\+Dto.\+Name, \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher\+Dto.\+Class\+Id}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+Empty(teacher\+Dto.\+Email) \&\&!string.\+Is\+Null\+Or\+Empty(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{teacher\+Dto.\+Password}})) \{ var credentials=new User\+Credentials(username\+:null!, \mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{password\+:teacher\+Dto.\+Password}}, email\+:teacher\+Dto.\+Email, user\+Type\+:\+User\+Type.\+Teacher);teacher.\+Set\+User\+Credentials(credentials);\} people.\+Add(teacher);\mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(teacher);var new\+Class=new Class(teacher\+Dto.\+Class\+Name ?? \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher\+Dto.\+Class\+Id}}, teacher);classes.\+Add(new\+Class);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(new\+Class);return Results.\+Created(\$"{}/api/teachers/\{\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}}\}"{}, new \{ Name=teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}}, Class\+Name=new\+Class.\+Class\+Name \});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_ad1efbe452d3052e466f41b9cca2224a6}{Map\+Get}} ("{}/api/classes"{},()=$>$ \{ var classes\+Dto=classes.\+Select(cls=$>$ new \{ Class\+Name=cls.\+Class\+Name, Teacher=new \{ Name=cls.\+Teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{cls.\+Teacher.\+Class\+Id}} \}, Students=cls.\+Students.\+Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \}).To\+List() \});return classes\+Dto;\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_ac68af9961e15d9fef813bb0467a27ec3}{Map\+Post}} ("{}/api/classes"{},(\mbox{[}From\+Body\mbox{]} Class\+Dto class\+Dto)=$>$ \{ var teacher=people.\+Of\+Type$<$ Teacher $>$().First\+Or\+Default(t=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}}==\mbox{\hyperlink{_program_8cs_a21d527c24d2a8875b147d446ece9c997}{class\+Dto.\+Teacher\+Id}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(teacher==null) return Results.\+Bad\+Request("{}Teacher not found"{});var new\+Class=new Class(class\+Dto.\+Class\+Name, teacher);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(\mbox{\hyperlink{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}{class\+Dto.\+Student\+Ids}} !=null) \{ foreach(var student\+Id in \mbox{\hyperlink{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}{class\+Dto.\+Student\+Ids}}) \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student !=null) new\+Class.\+Add\+Student(student);\} \} classes.\+Add(new\+Class);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(new\+Class);return Results.\+Created(\$"{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{new\+Class.\+Class\+Name\}"{}, new \{ Class\+Name=new\+Class.\+Class\+Name, Teacher=new \{ Name=new\+Class.\+Teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{new\+Class.\+Teacher.\+Class\+Id}} \}, Students=new\+Class.\+Students.\+Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \}).To\+List() \});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_adca97537aa6cf075b6e77107709df1f6}{Map\+Delete}} ("{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Name\}/students/\{student\+Id\}"{},(string class\+Name, string student\+Id)=$>$ \{ var decoded\+Class\+Name=Uri.\+Unescape\+Data\+String(class\+Name);var class\+Obj=classes.\+First\+Or\+Default(c=$>$ c.\+Class\+Name==decoded\+Class\+Name);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!class\+Obj.\+Students.\+Contains(student)) return Results.\+Bad\+Request("{}Student is not in the class"{});class\+Obj.\+Students.\+Remove(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(class\+Obj);return Results.\+No\+Content();\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a53698f92735e4efa95f4a34f907a2416}{Map\+Post}} ("{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Name\}/students/\{student\+Id\}"{},(string class\+Name, string student\+Id)=$>$ \{ var decoded\+Class\+Name=Uri.\+Unescape\+Data\+String(class\+Name);var class\+Obj=classes.\+First\+Or\+Default(c=$>$ c.\+Class\+Name==decoded\+Class\+Name);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj.\+Students.\+Contains(student)) return Results.\+Bad\+Request("{}Student already in class"{});class\+Obj.\+Add\+Student(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(class\+Obj);return Results.\+No\+Content();\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a76ef9db12078f25330aee1e68f8f51e8}{Map\+Delete}} ("{}/api/students/\{student\+Id\}/grades/\{grade\+Id\}"{},(string student\+Id, Guid grade\+Id)=$>$ \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});var success=student.\+Remove\+Grade\+By\+Id(grade\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!success) return Results.\+Not\+Found("{}Grade not found"{});\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+No\+Content();\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a571337310ab77eb90949ce7c31419e95}{Map\+Post}} ("{}/api/students/\{id\}/grades"{},(string id, \mbox{[}From\+Body\mbox{]} Grade\+Dto grade\+Dto)=$>$ \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});var grade=new Grade(\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{grade\+Dto.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(\mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}}$<$ 1\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}\mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}} $>$ 10) return Results.\+Bad\+Request("{}Grade must be between 1 and 10"{});student.\+Add\+Grade\+Today(grade);\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+Created(\$"{}/api/students/\{id\}/grades"{}, new \{ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{grade.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{Value}}=grade.\+Grade\+Value, Date=Date\+Time.\+Now \});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a913e073e0f2f031855f4808964785c29}{Map\+Post}} ("{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Id\}/bulk-\/grades"{},(string class\+Id, \mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_bulk_grade_upload_dto}{Bulk\+Grade\+Upload\+Dto}} bulk\+Upload)=$>$ \{ var class\+Obj=classes.\+First\+Or\+Default(c=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{c.\+Teacher.\+Class\+Id}}==class\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var grades\+To\+Upload=bulk\+Upload.\+Grades.\+Select(g=$>$(g.\+Student\+Id, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{g.\+Value}})).To\+List();class\+Obj.\+Bulk\+Upload\+Grades(class\+Id, grades\+To\+Upload);foreach(var grade\+Info in bulk\+Upload.\+Grades) \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==grade\+Info.\+Student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student !=null) \{ \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);\} \} return Results.\+Ok("{}Grades uploaded successfully"{});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_ad95ded877e7797d260b916c77f880bf7}{Map\+Post}} ("{}/api/auth/login"{},(\mbox{[}From\+Body\mbox{]} Login\+Dto login)=$>$ \{ Console.\+Write\+Line(\$"{}Login attempt for email\+: \{login.\+Email\}, \{\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{login.\+Password}}\}"{});var person=people.\+First\+Or\+Default(p=$>$ p.\+Get\+User\+Credentials()?.Email==login.\+Email);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person==null) \{ Console.\+Write\+Line("{}User not found"{});return Results.\+Unauthorized();\} var input\+Hash=Hash\+Password(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{login.\+Password}});var stored\+Hash=person.\+Get\+User\+Credentials()?.Password\+Hash;Console.\+Write\+Line(input\+Hash);Console.\+Write\+Line(stored\+Hash);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(input\+Hash !=stored\+Hash) \{ Console.\+Write\+Line("{}Invalid password"{});return Results.\+Unauthorized();\} var user\+Type=person.\+Get\+User\+Credentials()?.User\+Type;string role=user\+Type==User\+Type.\+Teacher ? "{}Teacher"{} \+:"{}Student"{};string id="{}"{};\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Student student) id=student.\+Get\+Student\+Id();else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Teacher teacher) id=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}};return Results.\+Ok(new \{ Email=person.\+Get\+User\+Credentials()?.Email, Role=role, Id=id, Name=person.\+Get\+Name() \});\})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a1b3b12b04e6b1a6b2471fd8d7ca8373f}{Map\+Put}} ("{}/api/users/\{id\}"{},(string id, \mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_user_update_dto}{User\+Update\+Dto}} update\+Dto)=$>$ \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);var teacher=people.\+Of\+Type$<$ Teacher $>$().First\+Or\+Default(t=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}}==id);var user=(Person?) student ?? teacher;\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user==null) return Results.\+Not\+Found("{}User not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+White\+Space(update\+Dto.\+Name)) \{ user.\+Set\+Name(update\+Dto.\+Name.\+Trim());\} var credentials=user.\+Get\+User\+Credentials();\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+White\+Space(update\+Dto.\+Email)) \{ \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(credentials==null) return Results.\+Bad\+Request("{}User has no credentials"{});credentials.\+Email=update\+Dto.\+Email.\+Trim();\} \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user is Student s) \{ \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(s);\} else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user is Teacher t) \{ \mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(t);\} return Results.\+Ok(new \{ Id=id, Name=user.\+Get\+Name(), Email=credentials?.Email \});\})
+\item 
+void \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}} (Student student)
+\item 
+void \mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}} (Teacher teacher)
+\item 
+void \mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}} (Class class\+Obj)
+\item 
+void \mbox{\hyperlink{_program_8cs_a81d52bf34beefa98e896d269545f3522}{Delete\+Student\+Data}} (string student\+Id)
+\item 
+void \mbox{\hyperlink{_program_8cs_ac53e5bcbd140c035e5b7bef816662ddb}{Save\+All\+Data}} (List$<$ Person $>$ \mbox{\hyperlink{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192}{people}}, List$<$ Class $>$ \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}})
+\item 
+void \mbox{\hyperlink{_program_8cs_a86f941e43e12c6e08e87134b5647ec1b}{Load\+Data}} (out List$<$ Person $>$ \mbox{\hyperlink{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192}{people}}, out List$<$ Class $>$ \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}})
+\item 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} \mbox{\hyperlink{_program_8cs_a7ee0a144abc670424fca988202e1779f}{Run}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+var \mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} = Web\+Application.\+Create\+Builder(args)
+\item 
+var \mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} = builder.\+Build()
+\item 
+var \mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}} = Path.\+Combine(Directory.\+Get\+Current\+Directory(), "{}Data"{})
+\item 
+var \mbox{\hyperlink{_program_8cs_aca771220f79fabf54cff3158988c9eef}{students\+Directory}} = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Students"{})
+\item 
+var \mbox{\hyperlink{_program_8cs_a589703c79a46ab97e0870a4691dbbc71}{teachers\+Directory}} = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Teachers"{})
+\item 
+var \mbox{\hyperlink{_program_8cs_a664adebf70dba89b25fadef9293d7631}{classes\+Directory}} = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Classes"{})
+\item 
+var \mbox{\hyperlink{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192}{people}} = new List$<$Person$>$()
+\item 
+var \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}} = new List$<$Class$>$()
+\item 
+var \mbox{\hyperlink{_program_8cs_abb6e93ce5aa8e25d3fcb49a835352258}{math\+Class}} = classes.\+First\+Or\+Default()
+\item 
+class \mbox{\hyperlink{class_student_dto}{Student\+Dto}} \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+\mbox{\hyperlink{_program_8cs_a112a711f766db446c2f517b794a1c04a}{set}}
+\item 
+int \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{Value}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+string \mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{Password}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+string \mbox{\hyperlink{_program_8cs_a21d527c24d2a8875b147d446ece9c997}{Teacher\+Id}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+List$<$ string $>$ \mbox{\hyperlink{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}{Student\+Ids}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+string \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+\mbox{\hyperlink{class_stored_credentials_dto}{Stored\+Credentials\+Dto}} \mbox{\hyperlink{_program_8cs_ab8493c05292cc575bc71789064d08ddc}{Credentials}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+Date\+Time \mbox{\hyperlink{_program_8cs_ad61a3202df3c958377a1f7d95cfebb46}{Timestamp}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\item 
+string \mbox{\hyperlink{_program_8cs_a162e1c788d6f455f2dd6ee8ce76c7131}{New\+Password}} \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_program_8cs_aff914b90223e4a23979ebaa1a65e95f9}\index{Program.cs@{Program.cs}!AddCors@{AddCors}}
+\index{AddCors@{AddCors}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddCors()}{AddCors()}}
+{\footnotesize\ttfamily \label{_program_8cs_aff914b90223e4a23979ebaa1a65e95f9} 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services Add\+Cors (\begin{DoxyParamCaption}\item[{options}]{}{, }\item[{\{ options.\+Add\+Policy("{}Allow\+Frontend"{}, policy=$>$ \{ policy.\+With\+Origins("{}http\+://localhost\+:5173"{}) .Allow\+Any\+Header() .Allow\+Any\+Method();\});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a2e633178c200863f89863cddcd887cbf}\index{Program.cs@{Program.cs}!AddEndpointsApiExplorer@{AddEndpointsApiExplorer}}
+\index{AddEndpointsApiExplorer@{AddEndpointsApiExplorer}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddEndpointsApiExplorer()}{AddEndpointsApiExplorer()}}
+{\footnotesize\ttfamily \label{_program_8cs_a2e633178c200863f89863cddcd887cbf} 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services Add\+Endpoints\+Api\+Explorer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a5241f492c8fad4f8ab0076c752f4c28d}\index{Program.cs@{Program.cs}!AddSwaggerGen@{AddSwaggerGen}}
+\index{AddSwaggerGen@{AddSwaggerGen}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddSwaggerGen()}{AddSwaggerGen()}}
+{\footnotesize\ttfamily \label{_program_8cs_a5241f492c8fad4f8ab0076c752f4c28d} 
+\mbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} Services Add\+Swagger\+Gen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a99e1d9052fdceb4afe203b23efe26ae1}\index{Program.cs@{Program.cs}!CreateDirectory@{CreateDirectory}}
+\index{CreateDirectory@{CreateDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{CreateDirectory()}{CreateDirectory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a99e1d9052fdceb4afe203b23efe26ae1} 
+Directory Create\+Directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_program_8cs_a664adebf70dba89b25fadef9293d7631}{classes\+Directory}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a2be4b6c058695534503204854683d024}\index{Program.cs@{Program.cs}!CreateDirectory@{CreateDirectory}}
+\index{CreateDirectory@{CreateDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{CreateDirectory()}{CreateDirectory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a2be4b6c058695534503204854683d024} 
+Directory Create\+Directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a9a611db0a1159de573fec22063c339cd}\index{Program.cs@{Program.cs}!CreateDirectory@{CreateDirectory}}
+\index{CreateDirectory@{CreateDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{CreateDirectory()}{CreateDirectory()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a9a611db0a1159de573fec22063c339cd} 
+Directory Create\+Directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_program_8cs_aca771220f79fabf54cff3158988c9eef}{students\+Directory}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a5b1322f0650fd3e9ad547695580335d1}\index{Program.cs@{Program.cs}!CreateDirectory@{CreateDirectory}}
+\index{CreateDirectory@{CreateDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{CreateDirectory()}{CreateDirectory()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a5b1322f0650fd3e9ad547695580335d1} 
+Directory Create\+Directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_program_8cs_a589703c79a46ab97e0870a4691dbbc71}{teachers\+Directory}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a81d52bf34beefa98e896d269545f3522}\index{Program.cs@{Program.cs}!DeleteStudentData@{DeleteStudentData}}
+\index{DeleteStudentData@{DeleteStudentData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{DeleteStudentData()}{DeleteStudentData()}}
+{\footnotesize\ttfamily \label{_program_8cs_a81d52bf34beefa98e896d269545f3522} 
+void Delete\+Student\+Data (\begin{DoxyParamCaption}\item[{string}]{student\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}\index{Program.cs@{Program.cs}!if@{if}}
+\index{if@{if}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9} 
+if (\begin{DoxyParamCaption}\item[{app.\+Environment.}]{Is\+Development}{()}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a5c2c66b7c17bdadf9f73c42d77059a0d}\index{Program.cs@{Program.cs}!if@{if}}
+\index{if@{if}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_a5c2c66b7c17bdadf9f73c42d77059a0d} 
+if (\begin{DoxyParamCaption}\item[{people.}]{Count}{ = {\ttfamily =~0~\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}~classes.Count~==~0}}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a86f941e43e12c6e08e87134b5647ec1b}\index{Program.cs@{Program.cs}!LoadData@{LoadData}}
+\index{LoadData@{LoadData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{LoadData()}{LoadData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_a86f941e43e12c6e08e87134b5647ec1b} 
+void Load\+Data (\begin{DoxyParamCaption}\item[{out List$<$ Person $>$}]{people}{, }\item[{out List$<$ Class $>$}]{classes}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_adf62abdced3a805e4f1e4a36afa45db3}\index{Program.cs@{Program.cs}!LoadData@{LoadData}}
+\index{LoadData@{LoadData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{LoadData()}{LoadData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_adf62abdced3a805e4f1e4a36afa45db3} 
+Load\+Data (\begin{DoxyParamCaption}\item[{out}]{people}{, }\item[{out}]{classes}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_adca97537aa6cf075b6e77107709df1f6}\index{Program.cs@{Program.cs}!MapDelete@{MapDelete}}
+\index{MapDelete@{MapDelete}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapDelete()}{MapDelete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_adca97537aa6cf075b6e77107709df1f6} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Delete (\begin{DoxyParamCaption}\item[{"{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Name\}/students/\{student\+Id\}"{}}]{}{, }\item[{(string class\+Name, string student\+Id)}]{}{, }\item[{\{ var decoded\+Class\+Name=Uri.\+Unescape\+Data\+String(class\+Name);var class\+Obj=classes.\+First\+Or\+Default(c=$>$ c.\+Class\+Name==decoded\+Class\+Name);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!class\+Obj.\+Students.\+Contains(student)) return Results.\+Bad\+Request("{}Student is not in the class"{});class\+Obj.\+Students.\+Remove(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(class\+Obj);return Results.\+No\+Content();\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a840f0b47a023ba1f1e9fb43d1d256c43}\index{Program.cs@{Program.cs}!MapDelete@{MapDelete}}
+\index{MapDelete@{MapDelete}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapDelete()}{MapDelete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_a840f0b47a023ba1f1e9fb43d1d256c43} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Delete (\begin{DoxyParamCaption}\item[{"{}/api/students/\{id\}"{}}]{}{, }\item[{(string id)}]{}{, }\item[{\{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found();people.\+Remove(student);foreach(var cls in \mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}) \{ \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(cls.\+Students.\+Contains(student)) \{ cls.\+Students.\+Remove(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(cls);\} \} \mbox{\hyperlink{_program_8cs_a81d52bf34beefa98e896d269545f3522}{Delete\+Student\+Data}}(id);return Results.\+No\+Content();\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a76ef9db12078f25330aee1e68f8f51e8}\index{Program.cs@{Program.cs}!MapDelete@{MapDelete}}
+\index{MapDelete@{MapDelete}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapDelete()}{MapDelete()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_a76ef9db12078f25330aee1e68f8f51e8} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Delete (\begin{DoxyParamCaption}\item[{"{}/api/students/\{student\+Id\}/grades/\{grade\+Id\}"{}}]{}{, }\item[{(string student\+Id, Guid grade\+Id)}]{}{, }\item[{\{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});var success=student.\+Remove\+Grade\+By\+Id(grade\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!success) return Results.\+Not\+Found("{}Grade not found"{});\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+No\+Content();\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_af128afc79f8df79ee9333c4d208679ef}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{_program_8cs_af128afc79f8df79ee9333c4d208679ef} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Get (\begin{DoxyParamCaption}\item[{"{}/"{}}]{}{, }\item[{()}]{}{, }\item[{Results.}]{Redirect}{"{}/swagger"{}}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ad1efbe452d3052e466f41b9cca2224a6}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{_program_8cs_ad1efbe452d3052e466f41b9cca2224a6} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Get (\begin{DoxyParamCaption}\item[{"{}/api/classes"{}}]{}{, }\item[{()}]{}{, }\item[{\{ var classes\+Dto=classes.\+Select(cls=$>$ new \{ Class\+Name=cls.\+Class\+Name, Teacher=new \{ Name=cls.\+Teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{cls.\+Teacher.\+Class\+Id}} \}, Students=cls.\+Students.\+Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \}).To\+List() \});return classes\+Dto;\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a6fa1a0836f6fc91d13969241ceb2b8ab}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{_program_8cs_a6fa1a0836f6fc91d13969241ceb2b8ab} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Get (\begin{DoxyParamCaption}\item[{"{}/api/students"{}}]{}{, }\item[{()}]{}{, }\item[{\{ var students=people.\+Of\+Type$<$ Student $>$().Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \});return students;\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a3063557278156ef21dc465d6a116b495}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{_program_8cs_a3063557278156ef21dc465d6a116b495} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Get (\begin{DoxyParamCaption}\item[{"{}/api/students/\{id\}/grades"{}}]{}{, }\item[{(string id)}]{}{, }\item[{\{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found();var grades=student.\+Get\+Grade\+History().Select(g=$>$ new \{ Id=g.\+Id, \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{g.\+Grade.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{Value}}=g.\+Grade.\+Grade\+Value, Date=\mbox{\hyperlink{_program_8cs_ad61a3202df3c958377a1f7d95cfebb46}{g.\+Timestamp}} \});return Results.\+Ok(grades);\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a1423d1e1a5b9f1baf745b1128a36c83f}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{_program_8cs_a1423d1e1a5b9f1baf745b1128a36c83f} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Get (\begin{DoxyParamCaption}\item[{"{}/api/teachers"{}}]{}{, }\item[{()}]{}{, }\item[{\{ var teachers=people.\+Of\+Type$<$ Teacher $>$().Select(t=$>$ new \{ Name=t.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}} \});return teachers;\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ad95ded877e7797d260b916c77f880bf7}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_ad95ded877e7797d260b916c77f880bf7} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/auth/login"{}}]{}{, }\item[{(\mbox{[}From\+Body\mbox{]} Login\+Dto login)}]{}{, }\item[{\{ Console.\+Write\+Line(\$"{}Login attempt for email\+: \{login.\+Email\}, \{\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{login.\+Password}}\}"{});var person=people.\+First\+Or\+Default(p=$>$ p.\+Get\+User\+Credentials()?.Email==login.\+Email);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person==null) \{ Console.\+Write\+Line("{}User not found"{});return Results.\+Unauthorized();\} var input\+Hash=Hash\+Password(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{login.\+Password}});var stored\+Hash=person.\+Get\+User\+Credentials()?.Password\+Hash;Console.\+Write\+Line(input\+Hash);Console.\+Write\+Line(stored\+Hash);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(input\+Hash !=stored\+Hash) \{ Console.\+Write\+Line("{}Invalid password"{});return Results.\+Unauthorized();\} var user\+Type=person.\+Get\+User\+Credentials()?.User\+Type;string role=user\+Type==User\+Type.\+Teacher ? "{}Teacher"{} \+:"{}Student"{};string id="{}"{};\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Student student) id=student.\+Get\+Student\+Id();else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Teacher teacher) id=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}};return Results.\+Ok(new \{ Email=person.\+Get\+User\+Credentials()?.Email, Role=role, Id=id, Name=person.\+Get\+Name() \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a6f4a7a6b36e81fdc1a84031ed28a4d4e}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_a6f4a7a6b36e81fdc1a84031ed28a4d4e} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/auth/reset-\/password"{}}]{}{, }\item[{(\mbox{[}From\+Body\mbox{]} Reset\+Password\+Dto dto)}]{}{, }\item[{\{ var person=people.\+First\+Or\+Default(p=$>$ p.\+Get\+User\+Credentials()?.Email==dto.\+Email);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person==null) return Results.\+Not\+Found("{}User with this email not found"{});var credentials=person.\+Get\+User\+Credentials();\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(credentials==null) return Results.\+Bad\+Request("{}User does not have credentials"{});credentials.\+Password\+Hash=Hash\+Password(\mbox{\hyperlink{_program_8cs_a162e1c788d6f455f2dd6ee8ce76c7131}{dto.\+New\+Password}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Student student) \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(person is Teacher teacher) \mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(teacher);return Results.\+Ok("{}Password reset successfully"{});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ac68af9961e15d9fef813bb0467a27ec3}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_ac68af9961e15d9fef813bb0467a27ec3} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/classes"{}}]{}{, }\item[{(\mbox{[}From\+Body\mbox{]} Class\+Dto class\+Dto)}]{}{, }\item[{\{ var teacher=people.\+Of\+Type$<$ Teacher $>$().First\+Or\+Default(t=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}}==\mbox{\hyperlink{_program_8cs_a21d527c24d2a8875b147d446ece9c997}{class\+Dto.\+Teacher\+Id}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(teacher==null) return Results.\+Bad\+Request("{}Teacher not found"{});var new\+Class=new Class(class\+Dto.\+Class\+Name, teacher);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(\mbox{\hyperlink{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}{class\+Dto.\+Student\+Ids}} !=null) \{ foreach(var student\+Id in \mbox{\hyperlink{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}{class\+Dto.\+Student\+Ids}}) \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student !=null) new\+Class.\+Add\+Student(student);\} \} classes.\+Add(new\+Class);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(new\+Class);return Results.\+Created(\$"{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{new\+Class.\+Class\+Name\}"{}, new \{ Class\+Name=new\+Class.\+Class\+Name, Teacher=new \{ Name=new\+Class.\+Teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{new\+Class.\+Teacher.\+Class\+Id}} \}, Students=new\+Class.\+Students.\+Select(s=$>$ new \{ Id=s.\+Get\+Student\+Id(), Name=s.\+Get\+Name() \}).To\+List() \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a913e073e0f2f031855f4808964785c29}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_a913e073e0f2f031855f4808964785c29} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Id\}/bulk-\/grades"{}}]{}{, }\item[{(string class\+Id,\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_bulk_grade_upload_dto}{Bulk\+Grade\+Upload\+Dto}} bulk\+Upload)}]{}{, }\item[{\{ var class\+Obj=classes.\+First\+Or\+Default(c=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{c.\+Teacher.\+Class\+Id}}==class\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var grades\+To\+Upload=bulk\+Upload.\+Grades.\+Select(g=$>$(g.\+Student\+Id, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{g.\+Value}})).To\+List();class\+Obj.\+Bulk\+Upload\+Grades(class\+Id, grades\+To\+Upload);foreach(var grade\+Info in bulk\+Upload.\+Grades) \{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==grade\+Info.\+Student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student !=null) \{ \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);\} \} return Results.\+Ok("{}Grades uploaded successfully"{});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a53698f92735e4efa95f4a34f907a2416}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_a53698f92735e4efa95f4a34f907a2416} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/\mbox{\hyperlink{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}{classes}}/\{class\+Name\}/students/\{student\+Id\}"{}}]{}{, }\item[{(string class\+Name, string student\+Id)}]{}{, }\item[{\{ var decoded\+Class\+Name=Uri.\+Unescape\+Data\+String(class\+Name);var class\+Obj=classes.\+First\+Or\+Default(c=$>$ c.\+Class\+Name==decoded\+Class\+Name);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj==null) return Results.\+Not\+Found("{}Class not found"{});var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==student\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(class\+Obj.\+Students.\+Contains(student)) return Results.\+Bad\+Request("{}Student already in class"{});class\+Obj.\+Add\+Student(student);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(class\+Obj);return Results.\+No\+Content();\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ad0b750b35a6be4e8f0d0a76d8d10908f}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_ad0b750b35a6be4e8f0d0a76d8d10908f} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/students"{}}]{}{, }\item[{(\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_student_dto}{Student\+Dto}} student\+Dto)}]{}{, }\item[{\{ var generated\+Id=Guid.\+New\+Guid().To\+String();var student=new Student(student\+Dto.\+Name, generated\+Id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+Empty(student\+Dto.\+Email) \&\&!string.\+Is\+Null\+Or\+Empty(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{student\+Dto.\+Password}})) \{ var credentials=new User\+Credentials(username\+:null!, \mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{password\+:student\+Dto.\+Password}}, email\+:student\+Dto.\+Email, user\+Type\+:\+User\+Type.\+Student);student.\+Set\+User\+Credentials(credentials);\} people.\+Add(student);\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+Created(\$"{}/api/students/\{student.\+Get\+Student\+Id()\}"{}, new \{ Id=student.\+Get\+Student\+Id(), Name=student.\+Get\+Name() \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a571337310ab77eb90949ce7c31419e95}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_a571337310ab77eb90949ce7c31419e95} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/students/\{id\}/grades"{}}]{}{, }\item[{(string id,\mbox{[}From\+Body\mbox{]} Grade\+Dto grade\+Dto)}]{}{, }\item[{\{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(student==null) return Results.\+Not\+Found("{}Student not found"{});var grade=new Grade(\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{grade\+Dto.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(\mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}}$<$ 1\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}\mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{grade\+Dto.\+Value}} $>$ 10) return Results.\+Bad\+Request("{}Grade must be between 1 and 10"{});student.\+Add\+Grade\+Today(grade);\mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(student);return Results.\+Created(\$"{}/api/students/\{id\}/grades"{}, new \{ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{grade.\+Class\+Id}}, \mbox{\hyperlink{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}{Value}}=grade.\+Grade\+Value, Date=Date\+Time.\+Now \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a514f8766dd2b4c3327be71dafd45fd0e}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \label{_program_8cs_a514f8766dd2b4c3327be71dafd45fd0e} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Post (\begin{DoxyParamCaption}\item[{"{}/api/teachers"{}}]{}{, }\item[{(\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_teacher_dto}{Teacher\+Dto}} teacher\+Dto)}]{}{, }\item[{\{ var teacher=new Teacher(teacher\+Dto.\+Name, \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher\+Dto.\+Class\+Id}});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+Empty(teacher\+Dto.\+Email) \&\&!string.\+Is\+Null\+Or\+Empty(\mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{teacher\+Dto.\+Password}})) \{ var credentials=new User\+Credentials(username\+:null!, \mbox{\hyperlink{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}{password\+:teacher\+Dto.\+Password}}, email\+:teacher\+Dto.\+Email, user\+Type\+:\+User\+Type.\+Teacher);teacher.\+Set\+User\+Credentials(credentials);\} people.\+Add(teacher);\mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(teacher);var new\+Class=new Class(teacher\+Dto.\+Class\+Name ?? \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher\+Dto.\+Class\+Id}}, teacher);classes.\+Add(new\+Class);\mbox{\hyperlink{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}{Save\+Class\+Data}}(new\+Class);return Results.\+Created(\$"{}/api/teachers/\{\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}}\}"{}, new \{ Name=teacher.\+Get\+Name(), \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{Class\+Id}}=\mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{teacher.\+Class\+Id}}, Class\+Name=new\+Class.\+Class\+Name \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a1b3b12b04e6b1a6b2471fd8d7ca8373f}\index{Program.cs@{Program.cs}!MapPut@{MapPut}}
+\index{MapPut@{MapPut}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPut()}{MapPut()}}
+{\footnotesize\ttfamily \label{_program_8cs_a1b3b12b04e6b1a6b2471fd8d7ca8373f} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Map\+Put (\begin{DoxyParamCaption}\item[{"{}/api/users/\{id\}"{}}]{}{, }\item[{(string id,\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_user_update_dto}{User\+Update\+Dto}} update\+Dto)}]{}{, }\item[{\{ var student=people.\+Of\+Type$<$ Student $>$().First\+Or\+Default(s=$>$ s.\+Get\+Student\+Id()==id);var teacher=people.\+Of\+Type$<$ Teacher $>$().First\+Or\+Default(t=$>$ \mbox{\hyperlink{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}{t.\+Class\+Id}}==id);var user=(Person?) student ?? teacher;\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user==null) return Results.\+Not\+Found("{}User not found"{});\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+White\+Space(update\+Dto.\+Name)) \{ user.\+Set\+Name(update\+Dto.\+Name.\+Trim());\} var credentials=user.\+Get\+User\+Credentials();\mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(!string.\+Is\+Null\+Or\+White\+Space(update\+Dto.\+Email)) \{ \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(credentials==null) return Results.\+Bad\+Request("{}User has no credentials"{});credentials.\+Email=update\+Dto.\+Email.\+Trim();\} \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user is Student s) \{ \mbox{\hyperlink{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}{Save\+Student\+Data}}(s);\} else \mbox{\hyperlink{_program_8cs_a79a944c7f0e25196ca3c5a8638b919b9}{if}}(user is Teacher t) \{ \mbox{\hyperlink{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}{Save\+Teacher\+Data}}(t);\} return Results.\+Ok(new \{ Id=id, Name=user.\+Get\+Name(), Email=credentials?.Email \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a7ee0a144abc670424fca988202e1779f}\index{Program.cs@{Program.cs}!Run@{Run}}
+\index{Run@{Run}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{_program_8cs_a7ee0a144abc670424fca988202e1779f} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ac53e5bcbd140c035e5b7bef816662ddb}\index{Program.cs@{Program.cs}!SaveAllData@{SaveAllData}}
+\index{SaveAllData@{SaveAllData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{SaveAllData()}{SaveAllData()}}
+{\footnotesize\ttfamily \label{_program_8cs_ac53e5bcbd140c035e5b7bef816662ddb} 
+void Save\+All\+Data (\begin{DoxyParamCaption}\item[{List$<$ Person $>$}]{people}{, }\item[{List$<$ Class $>$}]{classes}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8}\index{Program.cs@{Program.cs}!SaveClassData@{SaveClassData}}
+\index{SaveClassData@{SaveClassData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{SaveClassData()}{SaveClassData()}}
+{\footnotesize\ttfamily \label{_program_8cs_add8c0efbf32ded5a19cd6b5dc0793eb8} 
+void Save\+Class\+Data (\begin{DoxyParamCaption}\item[{Class}]{class\+Obj}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89}\index{Program.cs@{Program.cs}!SaveStudentData@{SaveStudentData}}
+\index{SaveStudentData@{SaveStudentData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{SaveStudentData()}{SaveStudentData()}}
+{\footnotesize\ttfamily \label{_program_8cs_a8ccfaba3f758736f93daa3e09d1b7b89} 
+void Save\+Student\+Data (\begin{DoxyParamCaption}\item[{Student}]{student}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c}\index{Program.cs@{Program.cs}!SaveTeacherData@{SaveTeacherData}}
+\index{SaveTeacherData@{SaveTeacherData}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{SaveTeacherData()}{SaveTeacherData()}}
+{\footnotesize\ttfamily \label{_program_8cs_a21946e8d8854757a8879fe16d65c3c3c} 
+void Save\+Teacher\+Data (\begin{DoxyParamCaption}\item[{Teacher}]{teacher}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a0462fe86f731cd04d4129e3561272216}\index{Program.cs@{Program.cs}!UseCors@{UseCors}}
+\index{UseCors@{UseCors}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{UseCors()}{UseCors()}}
+{\footnotesize\ttfamily \label{_program_8cs_a0462fe86f731cd04d4129e3561272216} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Use\+Cors (\begin{DoxyParamCaption}\item[{"{}Allow\+Frontend"{}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a040d8258361a7667b440292147b5a44a}\index{Program.cs@{Program.cs}!UseHttpsRedirection@{UseHttpsRedirection}}
+\index{UseHttpsRedirection@{UseHttpsRedirection}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{UseHttpsRedirection()}{UseHttpsRedirection()}}
+{\footnotesize\ttfamily \label{_program_8cs_a040d8258361a7667b440292147b5a44a} 
+\mbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} Use\+Https\+Redirection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}\index{Program.cs@{Program.cs}!app@{app}}
+\index{app@{app}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily \label{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d} 
+var app = builder.\+Build()}
+
+\Hypertarget{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}\index{Program.cs@{Program.cs}!builder@{builder}}
+\index{builder@{builder}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{builder}{builder}}
+{\footnotesize\ttfamily \label{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5} 
+var builder = Web\+Application.\+Create\+Builder(args)}
+
+\Hypertarget{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a}\index{Program.cs@{Program.cs}!classes@{classes}}
+\index{classes@{classes}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{classes}{classes}}
+{\footnotesize\ttfamily \label{_program_8cs_a71dd1371b3b1e377c31cb60bf6ef598a} 
+var classes = new List$<$Class$>$()}
+
+\Hypertarget{_program_8cs_a664adebf70dba89b25fadef9293d7631}\index{Program.cs@{Program.cs}!classesDirectory@{classesDirectory}}
+\index{classesDirectory@{classesDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{classesDirectory}{classesDirectory}}
+{\footnotesize\ttfamily \label{_program_8cs_a664adebf70dba89b25fadef9293d7631} 
+var classes\+Directory = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Classes"{})}
+
+\Hypertarget{_program_8cs_acf9290451f5aa84c882a862e3f4a4441}\index{Program.cs@{Program.cs}!ClassId@{ClassId}}
+\index{ClassId@{ClassId}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{ClassId}{ClassId}}
+{\footnotesize\ttfamily \label{_program_8cs_acf9290451f5aa84c882a862e3f4a4441} 
+string Class\+Id \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_ab8493c05292cc575bc71789064d08ddc}\index{Program.cs@{Program.cs}!Credentials@{Credentials}}
+\index{Credentials@{Credentials}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Credentials}{Credentials}}
+{\footnotesize\ttfamily \label{_program_8cs_ab8493c05292cc575bc71789064d08ddc} 
+\mbox{\hyperlink{class_stored_credentials_dto}{Stored\+Credentials\+Dto}} Credentials \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}\index{Program.cs@{Program.cs}!dataDirectory@{dataDirectory}}
+\index{dataDirectory@{dataDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{dataDirectory}{dataDirectory}}
+{\footnotesize\ttfamily \label{_program_8cs_a981a44fecac818dd8644ce0e040ccf75} 
+var data\+Directory = Path.\+Combine(Directory.\+Get\+Current\+Directory(), "{}Data"{})}
+
+\Hypertarget{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}\index{Program.cs@{Program.cs}!get@{get}}
+\index{get@{get}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{get}{get}}
+{\footnotesize\ttfamily \label{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4} 
+class \mbox{\hyperlink{class_stored_class_dto}{Stored\+Class\+Dto}} get}
+
+\Hypertarget{_program_8cs_abb6e93ce5aa8e25d3fcb49a835352258}\index{Program.cs@{Program.cs}!mathClass@{mathClass}}
+\index{mathClass@{mathClass}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{mathClass}{mathClass}}
+{\footnotesize\ttfamily \label{_program_8cs_abb6e93ce5aa8e25d3fcb49a835352258} 
+var math\+Class = classes.\+First\+Or\+Default()}
+
+\Hypertarget{_program_8cs_a162e1c788d6f455f2dd6ee8ce76c7131}\index{Program.cs@{Program.cs}!NewPassword@{NewPassword}}
+\index{NewPassword@{NewPassword}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{NewPassword}{NewPassword}}
+{\footnotesize\ttfamily \label{_program_8cs_a162e1c788d6f455f2dd6ee8ce76c7131} 
+string New\+Password \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4}\index{Program.cs@{Program.cs}!Password@{Password}}
+\index{Password@{Password}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Password}{Password}}
+{\footnotesize\ttfamily \label{_program_8cs_a9c7aae3a8518d5efd22e991b5944e0d4} 
+string Password \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192}\index{Program.cs@{Program.cs}!people@{people}}
+\index{people@{people}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{people}{people}}
+{\footnotesize\ttfamily \label{_program_8cs_a8ed8b36dae06eb0de7dda41ce2c93192} 
+var people = new List$<$Person$>$()}
+
+\Hypertarget{_program_8cs_a112a711f766db446c2f517b794a1c04a}\index{Program.cs@{Program.cs}!set@{set}}
+\index{set@{set}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{set}{set}}
+{\footnotesize\ttfamily \label{_program_8cs_a112a711f766db446c2f517b794a1c04a} 
+set}
+
+\Hypertarget{_program_8cs_a098b12abcf9427d34a8033f7c1940b22}\index{Program.cs@{Program.cs}!StudentIds@{StudentIds}}
+\index{StudentIds@{StudentIds}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{StudentIds}{StudentIds}}
+{\footnotesize\ttfamily \label{_program_8cs_a098b12abcf9427d34a8033f7c1940b22} 
+List$<$string$>$ Student\+Ids \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_aca771220f79fabf54cff3158988c9eef}\index{Program.cs@{Program.cs}!studentsDirectory@{studentsDirectory}}
+\index{studentsDirectory@{studentsDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{studentsDirectory}{studentsDirectory}}
+{\footnotesize\ttfamily \label{_program_8cs_aca771220f79fabf54cff3158988c9eef} 
+var students\+Directory = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Students"{})}
+
+\Hypertarget{_program_8cs_a21d527c24d2a8875b147d446ece9c997}\index{Program.cs@{Program.cs}!TeacherId@{TeacherId}}
+\index{TeacherId@{TeacherId}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{TeacherId}{TeacherId}}
+{\footnotesize\ttfamily \label{_program_8cs_a21d527c24d2a8875b147d446ece9c997} 
+string Teacher\+Id \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_a589703c79a46ab97e0870a4691dbbc71}\index{Program.cs@{Program.cs}!teachersDirectory@{teachersDirectory}}
+\index{teachersDirectory@{teachersDirectory}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{teachersDirectory}{teachersDirectory}}
+{\footnotesize\ttfamily \label{_program_8cs_a589703c79a46ab97e0870a4691dbbc71} 
+var teachers\+Directory = Path.\+Combine(\mbox{\hyperlink{_program_8cs_a981a44fecac818dd8644ce0e040ccf75}{data\+Directory}}, "{}Teachers"{})}
+
+\Hypertarget{_program_8cs_ad61a3202df3c958377a1f7d95cfebb46}\index{Program.cs@{Program.cs}!Timestamp@{Timestamp}}
+\index{Timestamp@{Timestamp}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Timestamp}{Timestamp}}
+{\footnotesize\ttfamily \label{_program_8cs_ad61a3202df3c958377a1f7d95cfebb46} 
+Date\+Time Timestamp \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+
+\Hypertarget{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552}\index{Program.cs@{Program.cs}!Value@{Value}}
+\index{Value@{Value}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}}
+{\footnotesize\ttfamily \label{_program_8cs_aca5c8bf6cfb5ea8d150d4b2f394fd552} 
+int Value \{ \mbox{\hyperlink{_program_8cs_a2955ec4d6dd0956169893e6d581e0be4}{get}}}
+

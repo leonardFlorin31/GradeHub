@@ -1,0 +1,201 @@
+\doxysection{Grade\+Hub\+::Main\+Classes\+::Student Class Reference}
+\hypertarget{class_grade_hub_1_1_main_classes_1_1_student}{}\label{class_grade_hub_1_1_main_classes_1_1_student}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+
+
+Represents a student in the system. Inherits from \doxylink{class_grade_hub_1_1_main_classes_1_1_person}{Person}.  
+
+
+Inheritance diagram for Grade\+Hub\+::Main\+Classes\+::Student\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_grade_hub_1_1_main_classes_1_1_student}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a2290dd2283fb6ebda822fb8cbdc3f460}{Student}} (string name, string student\+Id)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_grade_hub_1_1_main_classes_1_1_student}{Student} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a7b08ce51b24ea7133b8d470b5778da5b}{Add\+Grade}} (Date\+Time timestamp, \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}} grade)
+\begin{DoxyCompactList}\small\item\em Adds a grade for the student with a specific timestamp. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a2c076b78e0613bde34a4acc6c539a3d7}{Add\+Grade}} (Grade\+Entry entry)
+\begin{DoxyCompactList}\small\item\em Adds a pre-\/constructed Grade\+Entry to the student\textquotesingle{}s grade history. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a0aa32f8f0bbbe2fc3de2bdcd6b55757a}{Add\+Grade\+Today}} (\mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}} grade)
+\begin{DoxyCompactList}\small\item\em Adds a grade using the current system time as the timestamp. \end{DoxyCompactList}\item 
+List$<$ Grade\+Entry $>$ \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a2a11d774bae1533f65970c668406ea27}{Get\+Grade\+History}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the student\textquotesingle{}s full grade history. \end{DoxyCompactList}\item 
+Dictionary$<$ Date\+Time, \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}} $>$ \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_aa406a79c5d47deababeec384efbe63f8}{Get\+Grades}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the student\textquotesingle{}s grades as a dictionary of timestamps and grade values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a4100d3a600f0ea457dc5b6cfa6064eb2}{Set\+Student\+Id}} (string student\+Id)
+\begin{DoxyCompactList}\small\item\em Sets the student\textquotesingle{}s ID. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a41d206cc4cd9fdf93b9851a343bd9501}{Get\+Student\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Gets the student\textquotesingle{}s unique ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a09d6d7f1cf48ae5852d8991facd2cbde}{Remove\+First\+Grade\+By\+Value}} (int value)
+\begin{DoxyCompactList}\small\item\em Removes the first grade entry that matches the given value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_student_a7783460b4845f3d0271a194ec6b64d76}{Remove\+Grade\+By\+Id}} (Guid grade\+Id)
+\begin{DoxyCompactList}\small\item\em Removes a grade entry by its unique identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a student in the system. Inherits from \doxylink{class_grade_hub_1_1_main_classes_1_1_person}{Person}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a2290dd2283fb6ebda822fb8cbdc3f460}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!Student@{Student}}
+\index{Student@{Student}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{Student()}{Student()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a2290dd2283fb6ebda822fb8cbdc3f460} 
+Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Student (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{string}]{student\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \doxylink{class_grade_hub_1_1_main_classes_1_1_student}{Student} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The student\textquotesingle{}s name.\\
+\hline
+{\em student\+Id} & The student\textquotesingle{}s unique ID.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a7b08ce51b24ea7133b8d470b5778da5b}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!AddGrade@{AddGrade}}
+\index{AddGrade@{AddGrade}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{AddGrade()}{AddGrade()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a7b08ce51b24ea7133b8d470b5778da5b} 
+void Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Add\+Grade (\begin{DoxyParamCaption}\item[{Date\+Time}]{timestamp}{, }\item[{\mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}}}]{grade}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a grade for the student with a specific timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The date and time of the grade.\\
+\hline
+{\em grade} & The grade object.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a2c076b78e0613bde34a4acc6c539a3d7}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!AddGrade@{AddGrade}}
+\index{AddGrade@{AddGrade}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{AddGrade()}{AddGrade()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a2c076b78e0613bde34a4acc6c539a3d7} 
+void Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Add\+Grade (\begin{DoxyParamCaption}\item[{Grade\+Entry}]{entry}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a pre-\/constructed Grade\+Entry to the student\textquotesingle{}s grade history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & The grade entry to add.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a0aa32f8f0bbbe2fc3de2bdcd6b55757a}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!AddGradeToday@{AddGradeToday}}
+\index{AddGradeToday@{AddGradeToday}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{AddGradeToday()}{AddGradeToday()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a0aa32f8f0bbbe2fc3de2bdcd6b55757a} 
+void Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Add\+Grade\+Today (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}}}]{grade}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a grade using the current system time as the timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grade} & The grade object.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a2a11d774bae1533f65970c668406ea27}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!GetGradeHistory@{GetGradeHistory}}
+\index{GetGradeHistory@{GetGradeHistory}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{GetGradeHistory()}{GetGradeHistory()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a2a11d774bae1533f65970c668406ea27} 
+List$<$ Grade\+Entry $>$ Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Get\+Grade\+History (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the student\textquotesingle{}s full grade history. 
+
+\begin{DoxyReturn}{Returns}
+A list of Grade\+Entry objects.
+\end{DoxyReturn}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_aa406a79c5d47deababeec384efbe63f8}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!GetGrades@{GetGrades}}
+\index{GetGrades@{GetGrades}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{GetGrades()}{GetGrades()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_aa406a79c5d47deababeec384efbe63f8} 
+Dictionary$<$ Date\+Time, \mbox{\hyperlink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}} $>$ Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Get\+Grades (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the student\textquotesingle{}s grades as a dictionary of timestamps and grade values. 
+
+\begin{DoxyReturn}{Returns}
+A dictionary mapping Date\+Time to \doxylink{class_grade_hub_1_1_main_classes_1_1_grade}{Grade}.
+\end{DoxyReturn}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a41d206cc4cd9fdf93b9851a343bd9501}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!GetStudentId@{GetStudentId}}
+\index{GetStudentId@{GetStudentId}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{GetStudentId()}{GetStudentId()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a41d206cc4cd9fdf93b9851a343bd9501} 
+string Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Get\+Student\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the student\textquotesingle{}s unique ID. 
+
+\begin{DoxyReturn}{Returns}
+The student ID.
+\end{DoxyReturn}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a09d6d7f1cf48ae5852d8991facd2cbde}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!RemoveFirstGradeByValue@{RemoveFirstGradeByValue}}
+\index{RemoveFirstGradeByValue@{RemoveFirstGradeByValue}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{RemoveFirstGradeByValue()}{RemoveFirstGradeByValue()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a09d6d7f1cf48ae5852d8991facd2cbde} 
+void Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Remove\+First\+Grade\+By\+Value (\begin{DoxyParamCaption}\item[{int}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes the first grade entry that matches the given value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The grade value to remove.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a7783460b4845f3d0271a194ec6b64d76}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!RemoveGradeById@{RemoveGradeById}}
+\index{RemoveGradeById@{RemoveGradeById}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{RemoveGradeById()}{RemoveGradeById()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a7783460b4845f3d0271a194ec6b64d76} 
+bool Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Remove\+Grade\+By\+Id (\begin{DoxyParamCaption}\item[{Guid}]{grade\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a grade entry by its unique identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grade\+Id} & The GUID of the grade entry.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if removed; false if not found.
+\end{DoxyReturn}
+\Hypertarget{class_grade_hub_1_1_main_classes_1_1_student_a4100d3a600f0ea457dc5b6cfa6064eb2}\index{GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}!SetStudentId@{SetStudentId}}
+\index{SetStudentId@{SetStudentId}!GradeHub::MainClasses::Student@{GradeHub::MainClasses::Student}}
+\doxysubsubsection{\texorpdfstring{SetStudentId()}{SetStudentId()}}
+{\footnotesize\ttfamily \label{class_grade_hub_1_1_main_classes_1_1_student_a4100d3a600f0ea457dc5b6cfa6064eb2} 
+void Grade\+Hub\+::\+Main\+Classes\+::\+Student\+::\+Set\+Student\+Id (\begin{DoxyParamCaption}\item[{string}]{student\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the student\textquotesingle{}s ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+Id} & The new student ID.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Grade\+Hub/\+Class/\mbox{\hyperlink{_student_8cs}{Student.\+cs}}\end{DoxyCompactItemize}

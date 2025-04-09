@@ -1,33 +1,51 @@
-﻿
-namespace GradeHub.MainClasses;
-
-public class Person : IPerson
+﻿namespace GradeHub.MainClasses
 {
-    private string _name;
-    private UserCredentials _userCredentials;
-
-    public Person(string name)
+    /// <summary>
+    /// Base class representing a person in the system.
+    /// Implements <see cref="IPerson"/> interface.
+    /// </summary>
+    public class Person : IPerson
     {
-        _name = name;
-    }
+        private string _name;
+        private UserCredentials _userCredentials;
 
-    public void SetUserCredentials(UserCredentials userCredentials)
-    {
-        _userCredentials = userCredentials;
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Person"/> class with the given name.
+        /// </summary>
+        /// <param name="name">The name of the person.</param>
+        public Person(string name)
+        {
+            _name = name;
+        }
 
-    public UserCredentials GetUserCredentials()
-    {
-        return _userCredentials;
-    }
+        /// <summary>
+        /// Sets the credentials for the person.
+        /// </summary>
+        /// <param name="userCredentials">The credentials to assign.</param>
+        public void SetUserCredentials(UserCredentials userCredentials)
+        {
+            _userCredentials = userCredentials;
+        }
 
-    public void SetName(string name)
-    {
-        _name = name;
-    }
+        /// <summary>
+        /// Gets the credentials associated with the person.
+        /// </summary>
+        /// <returns>The <see cref="UserCredentials"/> object.</returns>
+        public UserCredentials GetUserCredentials()
+        {
+            return _userCredentials;
+        }
 
-    public string GetName()
-    {
-        return _name;
+        /// <inheritdoc/>
+        public void SetName(string name)
+        {
+            _name = name;
+        }
+
+        /// <inheritdoc/>
+        public string GetName()
+        {
+            return _name;
+        }
     }
 }
