@@ -21,12 +21,6 @@
       "Timestamp": "2025-04-09T14:50:22.6653713+03:00"
     },
     {
-      "Id": "84021afc-9da0-48ef-83e9-5aedc9406ef6",
-      "ClassId": "CS303",
-      "Value": 10,
-      "Timestamp": "2025-04-09T14:50:22.6653737+03:00"
-    },
-    {
       "Id": "a5a037e0-c790-41a6-acf0-d97a9dc82030",
       "ClassId": "Bio202",
       "Value": 8,
@@ -37,6 +31,30 @@
       "ClassId": "Bio202",
       "Value": 9,
       "Timestamp": "2025-04-09T14:50:22.6653752+03:00"
+    },
+    {
+      "Id": "1244a113-5cea-4ec2-be8c-ed4c0fe84c75",
+      "ClassId": "CS303",
+      "Value": 7,
+      "Timestamp": "2025-04-09T15:05:11.8111188+03:00"
+    },
+    {
+      "Id": "6aeb1e56-91a7-45e3-b811-8786c6e6fa59",
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-09T15:05:40.4850456+03:00"
+    },
+    {
+      "Id": "961cc76d-6646-40e1-a4cb-091a4b0eafb9",
+      "ClassId": "CS303",
+      "Value": 9,
+      "Timestamp": "2025-04-09T15:05:40.4859109+03:00"
+    },
+    {
+      "Id": "de4a0dd4-0fbd-459f-8b7a-5b9b5a83c3e8",
+      "ClassId": "CS303",
+      "Value": 10,
+      "Timestamp": "2025-04-09T15:12:34.0192998+03:00"
     }
   ]
 }

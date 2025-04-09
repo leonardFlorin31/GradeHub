@@ -1,12 +1,40 @@
 import { useEffect, useState } from "react";
 import GradeManager from "./GradeManager";
 import ClassManager from "./ClassManager";
+import BulkGradeUploader from "./BulkGradeUploader";
 
 const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
   const [classes, setClasses] = useState<any[]>([]);
   const [studentGrades, setStudentGrades] = useState<Record<string, any[]>>({});
 
   const fetchTeacherClasses = () => {
+    fetch("https://localhost:64060/api/classes")
+      .then((res) => res.json())
+      .then((data) => {
+        const teacherClasses = data.filter(
+          (c: any) => c.teacher.classId === teacherId
+        );
+        setClasses(teacherClasses);
+
+        teacherClasses.forEach((cls: any) => {
+          cls.students.forEach((student: any) => {
+            fetch(`https://localhost:64060/api/students/${student.id}/grades`)
+              .then((res) => res.json())
+              .then((grades) => {
+                setStudentGrades((prev) => ({
+                  ...prev,
+                  [student.id]: grades.filter(
+                    (g: any) => g.classId === teacherId
+                  ),
+                }));
+              });
+          });
+        });
+      });
+  };
+
+  const fetchTeacherClassesFromBulk = () => {
+    setClasses([]);
     fetch("https://localhost:64060/api/classes")
       .then((res) => res.json())
       .then((data) => {
@@ -98,12 +126,19 @@ const TeacherClassGrades = ({ teacherId }: { teacherId: string }) => {
       </div>
 
       {/* Right - Class Manager */}
-      <div className="w-1/3 mt-24">
+      <div className="w-1/3 mt-24 space-y-6">
         {classes[0] && (
-          <ClassManager
-            teacherClass={classes[0]}
-            onChange={fetchTeacherClasses} // ⬅️ Refresh parent from child
-          />
+          <>
+            <ClassManager
+              teacherClass={classes[0]}
+              onChange={fetchTeacherClasses}
+            />
+
+            <BulkGradeUploader
+              classId={classes[0].teacher.classId}
+              onUploadSuccess={fetchTeacherClassesFromBulk}
+            />
+          </>
         )}
       </div>
     </div>

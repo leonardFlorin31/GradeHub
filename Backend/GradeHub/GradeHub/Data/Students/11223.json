@@ -19,6 +19,24 @@
       "ClassId": "Bio202",
       "Value": 7,
       "Timestamp": "2025-04-09T14:50:22.6653773+03:00"
+    },
+    {
+      "Id": "7b2e2aa5-9d6e-44f6-8f5f-35628eebb8dd",
+      "ClassId": "CS303",
+      "Value": 2,
+      "Timestamp": "2025-04-09T15:31:09.4680403+03:00"
+    },
+    {
+      "Id": "bc54399b-a90e-492d-bbe3-6870bd1e467f",
+      "ClassId": "CS303",
+      "Value": 2,
+      "Timestamp": "2025-04-09T15:32:23.3061268+03:00"
+    },
+    {
+      "Id": "a98ad969-e283-48c6-9fab-7870b289ffcc",
+      "ClassId": "CS303",
+      "Value": 6,
+      "Timestamp": "2025-04-09T15:33:43.9161935+03:00"
     }
   ]
 }
