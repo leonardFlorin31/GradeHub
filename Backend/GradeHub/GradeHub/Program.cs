@@ -364,25 +364,46 @@ app.MapPost("/api/classes", ([FromBody] ClassDto classDto) => {
 });
 
 
-app.MapPost("/api/classes/{className}/students/{studentId}", (string className, string studentId) => {
-    var classObj = classes.FirstOrDefault(c => c.ClassName == className);
+app.MapDelete("/api/classes/{className}/students/{studentId}", (string className, string studentId) =>
+{
+    var decodedClassName = Uri.UnescapeDataString(className);
+    var classObj = classes.FirstOrDefault(c => c.ClassName == decodedClassName);
     if (classObj == null)
         return Results.NotFound("Class not found");
-    
+
     var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == studentId);
     if (student == null)
         return Results.NotFound("Student not found");
-    
-    if (classObj.Students.Contains(student))
-        return Results.BadRequest("Student already in class");
-    
-    classObj.AddStudent(student);
-    
-    // Save class data
+
+    if (!classObj.Students.Contains(student))
+        return Results.BadRequest("Student is not in the class");
+
+    classObj.Students.Remove(student);
     SaveClassData(classObj);
-    
+
     return Results.NoContent();
 });
+
+app.MapPost("/api/classes/{className}/students/{studentId}", (string className, string studentId) => {
+    var decodedClassName = Uri.UnescapeDataString(className);
+    var classObj = classes.FirstOrDefault(c => c.ClassName == decodedClassName);
+    if (classObj == null)
+        return Results.NotFound("Class not found");
+
+    var student = people.OfType<Student>().FirstOrDefault(s => s.GetStudentId() == studentId);
+    if (student == null)
+        return Results.NotFound("Student not found");
+
+    if (classObj.Students.Contains(student))
+        return Results.BadRequest("Student already in class");
+
+    classObj.AddStudent(student);
+    SaveClassData(classObj);
+
+    return Results.NoContent();
+});
+
+
 
 
 app.MapDelete("/api/students/{studentId}/grades/{gradeId}", (string studentId, Guid gradeId) =>

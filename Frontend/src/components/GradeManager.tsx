@@ -57,7 +57,7 @@ const GradeManager = ({ studentId, classId }: GradeManagerProps) => {
     <div className="border rounded-lg p-4 bg-white shadow mt-1">
       <h4 className="text-lg font-semibold mb-2 text-bice-blue">
         Manage Grades for Student ID:{" "}
-        <span className="text-gray-700">{studentId}</span>
+        <span className="text-gray-700">{studentId.slice(0, 5)}</span>
       </h4>
 
       <ul className="mb-4 space-y-1">

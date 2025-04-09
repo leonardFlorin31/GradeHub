@@ -1,0 +1,36 @@
+{
+  "Id": "145b7e4f-bd87-4740-bee7-15153346c0ef",
+  "Name": "Quentin Tarantino",
+  "Credentials": {
+    "Username": null,
+    "Password": "73l8gRjwLftklgfdXT\u002BMdiMEjJwGPVMsyVxe16iYpk8=",
+    "Email": "tara@email.com",
+    "UserType": "Student"
+  },
+  "Grades": [
+    {
+      "Id": "9d2e0119-a949-4ae9-8978-ba4cb74fae54",
+      "ClassId": "CS303",
+      "Value": 2,
+      "Timestamp": "2025-04-09T14:53:45.1328252+03:00"
+    },
+    {
+      "Id": "ef358f78-4772-47a9-a384-00ba7a85bab1",
+      "ClassId": "CS303",
+      "Value": 3,
+      "Timestamp": "2025-04-09T14:53:48.3124253+03:00"
+    },
+    {
+      "Id": "3045a954-0a43-4abf-992e-effba81b93cf",
+      "ClassId": "CS303",
+      "Value": 2,
+      "Timestamp": "2025-04-09T14:53:50.3451776+03:00"
+    },
+    {
+      "Id": "9a96f301-fb9b-4c8b-9361-e2450f59263c",
+      "ClassId": "CS303",
+      "Value": 8,
+      "Timestamp": "2025-04-09T14:53:51.9538724+03:00"
+    }
+  ]
+}
